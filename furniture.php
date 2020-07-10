@@ -11,8 +11,8 @@ include("header.php");
             <div class="row bg">
                 <main class="main col-sm-12" role="main">
                     <div class="header-product-wrap">
-                        <div class="content-header">
-                            <div class="section-sub-title">
+                        <div class="content-header" id="content-header">
+                            <div class="section-sub-title" id="section-sub-title">
                                 <p style="text-align: center; margin-bottom: 30px;">Since 1989 Helmuth Builders has had
                                     a
                                     single mission – to serve the Shenandoah Valley by providing the best possible
