@@ -8,7 +8,7 @@
 	    <div class="panel-body">
 	    	<div class="form-group">
 				<label for="email">Tài khoản:</label>
-				<input type="text" class="form-control" name="user_name_lg" placeholder="Nhập tên đăng nhập...">
+				<input type="text" class="form-control" name="user_name_lg" placeholder="Nhập email đăng nhập...">
 			</div>
  
 			<div class="form-group">

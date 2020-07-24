@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helmuth</title>
-    <link rel="stylesheet" href="./src/styles.css">
+    <link rel="stylesheet" href="/src/styles.css">
+    <link href="http://db.onlinewebfonts.com/c/173aa2c75698b66f4ebbd3b63f4b8030?family=Alternate+Gothic+No1+D" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -22,18 +23,18 @@
                     <div class="chanel-social">
                         <a target="_blank" class="chanel chanel-facebook"
                             href="https://www.facebook.com/HelmuthBuildersInc/">
-                            <img src="./src/images/facebook.svg" alt="facebook">
+                            <img src="/src/images/facebook.svg" alt="facebook">
                         </a>
                         <a target="_blank" class="chanel chanel-instagram"
                             href="https://www.instagram.com/helmuthbuilders/">
-                            <img src="./src/images/instagram.svg" alt="instagram">
+                            <img src="/src/images/instagram.svg" alt="instagram">
                         </a>
                         <a target="_blank" class="chanel chanel-twitter" href="https://twitter.com/helmuthbuilders">
-                            <img src="./src/images/twitter.svg" alt="twitter">
+                            <img src="/src/images/twitter.svg" alt="twitter">
                         </a>
                         <a target="_blank" class="chanel chanel-google"
                             href="https://plus.google.com/u/0/111509630275663484126">
-                            <img src="./src/images/google-plus.svg" alt="">
+                            <img src="/src/images/google-plus.svg" alt="">
                         </a>
                     </div>
                     <form role="search" class="form" method="get" id="searchform" action="https://helmuthbuilders.com/">
@@ -41,7 +42,7 @@
                             <input type="search" value="" name="s" id="s" class="form-control" placeholder="Search">
                             <span class="input-group-btn">
                                 <button type="submit" id="searchsubmit" class="btn btn-default">
-                                    <img src="./src/images/search-icon.png" alt="">
+                                    <img src="/src/images/search-icon.png" alt="">
                                 </button>
                             </span>
                         </div>
@@ -52,10 +53,10 @@
             <nav id="fixed-navbar" class="nav-main navbar-collapse collapse" role="navigation">
                 <ul id="menu-main-menu" class="navbar-nav nav pull-right">
                     <li class="menu-item menu-home active">
-                        <a title="Home" href="helmuthhtml.html">Home</a>
+                        <a title="Home" href="index.php">Home</a>
                     </li>
                     <li class="menu-item menu-products dropdown">
-                        <a class="menu-item-link-products" title="Products" href="Furniture.html" class="dropdown-toggle"
+                        <a class="menu-item-link-products" title="Products" href="/furniture.php" class="dropdown-toggle"
                             aria-haspopup="true">Products
                             <span class="caret"></span>
                         </a>
@@ -70,7 +71,7 @@
                                 <a title="OUTDOOR LIVING" href="#">OUTDOOR LIVING</a>
                             </li>
                             <li class="menu-item menu-furniture">
-                                <a title="FURNITURE" href="http://helmuthhtml.local/Furniture.html">FURNITURE</a>
+                                <a title="FURNITURE" href="/furniture.php">FURNITURE</a>
                             </li>
                         </ul>
                     </li>
@@ -150,7 +151,7 @@
                     </li>
                     <li class="menu-item shopping-cart">
                         <a href="/cart/">
-                            <img src="./src/images/shopping-cart.png" alt="cart">
+                            <img src="/src/images/shopping-cart.png" alt="cart">
                         </a>
                     </li>
                 </ul>

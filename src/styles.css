@@ -2,22 +2,20 @@ body{
     margin: 0;
     padding: 0;
 }
+@font-face {font-family: "Alternate Gothic No1 D"; src: url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.eot"); src: url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.woff") format("woff"), url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.svg#Alternate Gothic No1 D") format("svg"); }
 
 html {
     font-size: 10px;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: "Alternate Gothic No1 D";
 }
 
-font-face {
+/* font-face {
     font-family:font_strong;
     src:url('../src/Oswald-VariableFont_wght.ttf') ;
     font-weight:normal;
     font-style:normal;
-   }
-
-html{
-    font-family:Arial, Helvetica, sans-serif;
-}
+   } */
 
 .header-inner {
     padding: 0 5%;
@@ -97,12 +95,12 @@ line-height: 40px;
     text-decoration: none;
     color: #231F20;
     display: block;
-
-    font-size: 15px;
+width: max-content;
+    font-size: 20px;
     line-height: normal;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    /*  */
     color: #231F20 !important;
     padding: 17px 26px;
 }
@@ -286,7 +284,7 @@ li.shopping-cart > a > img{
 }
 
 .hero-menu #hero-menu-iterm li a {
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    /*  */
     color: #FFF;
     font-size: 40px;
     letter-spacing: 0.05em;
@@ -339,7 +337,7 @@ li.shopping-cart > a > img{
 
 .wrap-grid .grid-title {
     font-size: 30px;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    /*  */
     margin: 0;
     font-style: normal;
 }
@@ -348,8 +346,7 @@ li.shopping-cart > a > img{
     position: relative;
     top: -300px;
     color: #fff;
-    background-color: #720C0B;
-    opacity: 50%;
+    background-color:rgba(114, 12, 11, 0.85);
 }
 
 .wrap-grid a{
@@ -401,7 +398,7 @@ li.shopping-cart > a > img{
     padding: 0 !important;
     font-size: 20px;
     color: #231F20;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    /*  */
     margin: 4px 30px 0 30px !important;
     letter-spacing: 0.05em;
     border-bottom: 3px solid #fff;
@@ -454,7 +451,7 @@ li.shopping-cart > a > img{
     font-size: 250px;
     color: rgba(35, 31, 32, 0.06);
     letter-spacing: 0.05em;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    /*  */
     line-height: 150px;
     position: absolute;
     z-index: -2;
@@ -624,7 +621,7 @@ section.contact .contact-f textarea {
     background-color: transparent !important;
     border-bottom: 2px solid #FFF;
     padding: 0 15px;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    /*  */
     font-size: 32px;
     letter-spacing: 0.05em;
     line-height: 38px;
@@ -752,7 +749,7 @@ footer#page-footer #copyright-bar img {
 }
 
 .hero-menu-f ul li a {
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    
     color: #FFF;
     font-size: 40px;
     letter-spacing: 0.05em;
@@ -763,6 +760,20 @@ footer#page-footer #copyright-bar img {
     line-height: normal;
     background: transparent;
 }
+.is_fixed ul li a {
+    
+    color: #000;
+    font-size: 40px;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    line-height: normal;
+    background: transparent;
+    text-decoration: none;
+}
+
 
 .hero-menu-f.fixed-hero-menu {
     position: fixed;
@@ -797,7 +808,7 @@ footer#page-footer #copyright-bar img {
     letter-spacing: 0.05em;
     color: #FFFFFF;
     margin: 0;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    
 }
 
 
@@ -845,7 +856,7 @@ footer#page-footer #copyright-bar img {
 .more-cat .description a {
     font-size: 32px;
     text-transform: uppercase;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    
     display: block;
     margin-top: 60px;
     text-decoration: underline;
@@ -854,6 +865,11 @@ footer#page-footer #copyright-bar img {
 
 
 /* //////////////////our funiture */
+.main_list_product{
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
 
 main, .archive:not(.home) main, .single-post main {
     padding: 100px 8%;
@@ -895,10 +911,10 @@ body .product-item .caption {
 }
 
 .product-item .product-title {
-    font-size: 28px;
+    font-size: 29px;
     color: #871211;
     text-transform: uppercase;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    
     letter-spacing: 0.05em;
 }
 
@@ -910,7 +926,7 @@ body .product-item .caption {
 .page-title{
     font-size: 120px;
     color: #871211;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    
     line-height: 100px;
     margin-bottom: 20px;
     margin-top: 0;
@@ -936,12 +952,12 @@ body .product-item .caption {
     padding: 5px !important;
     height: 32px;
     text-align: center;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    
 }
 
-.price-currencySymbol{
+/* .price-currencySymbol{
     width: 20%;
-}
+} */
 /* .caption, */
 .product-title{
     width: 100%;
@@ -951,22 +967,43 @@ body .product-item .caption {
     box-sizing: border-box;
     /* border: solid 1px black; */
 }
+.quantity{
+    overflow: hidden;
+    clear: both;
+    /* position: absolute; */
+    right: 170px;
+    bottom: 0px;
+}
 .product-subtitle{
     width: 100%;
     padding: 0;
     overflow: hidden;
     /* border: solid 1px black; */
 }
-.product-subtitle form{
-    width: 70%;
-    float: left;
-}
+
 .price{
-    float: left;
-    margin: 16px 11px;
     width: 20%;
     font-size: 28px;
+    color: #231F20;
+    margin-bottom: 5px;
+    line-height: 23px;
+    min-height: 23px;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    
 }
+.products{
+    float: left;
+    width: 100%;
+}
+
+/* .cart{
+    width: 0%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+} */
 
   .add-to-cart,.add_to_cart_button{
     background: #272a33;
@@ -1045,7 +1082,7 @@ body .product-item .caption {
 .entry-title {
     font-size: 48px;
     color: #871211;
-    font-family: "alternate-gothic-no-1-d",sans-serif;
+    
     line-height: 48px;
     margin-bottom: 20px;
     margin-top: 0;
