@@ -1,6 +1,10 @@
 <?php
+ob_start();
+include("includes/db.inc.php");
 include("includes/header.php");
 include("includes/navbar.php");
+
+include("security.php");
 ?>
 
 
@@ -11,7 +15,7 @@ include("includes/navbar.php");
     <div id="content">
 
         <?php
-            include("includes/topbar.php");
+        include("includes/topbar.php");
         ?>
 
         <!-- Begin Page Content -->
@@ -20,8 +24,7 @@ include("includes/navbar.php");
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">User</h1>
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
             </div>
 
             <!-- Content Row -->
@@ -76,8 +79,7 @@ include("includes/navbar.php");
                                         </div>
                                         <div class="col">
                                             <div class="progress progress-sm mr-2">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -108,18 +110,15 @@ include("includes/navbar.php");
                     </div>
                 </div>
             </div>
-
             <!-- Content Row -->
-
-
         </div>
         <!-- /.container-fluid -->
-
     </div>
     <!-- End of Main Content -->
 
 
     <?php
-include("includes/footer.php");
-include("includes/script.php");
-?>
+    include("includes/footer.php");
+    include("includes/script.php");
+    ob_end_flush();
+    ?>

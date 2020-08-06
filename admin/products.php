@@ -1,8 +1,10 @@
 <?php
+ob_start();
 include("includes/db.inc.php");
 include("includes/header.php");
 include("includes/navbar.php");
 
+include("security.php");
 ?>
 
 
@@ -62,9 +64,9 @@ include("includes/navbar.php");
                         FROM
                         child_category
                         INNER JOIN
-                        productss USING (child_cate_id )
+                        products USING (child_cate_id )
                         INNER JOIN
-                        product_detailss USING (product_id )
+                        product_details USING (product_id )
                         INNER JOIN
                         prooduct_image_relationship USING (product_dt_id  )
                         INNER JOIN
@@ -204,4 +206,5 @@ include("includes/navbar.php");
     <?php
 include("includes/script.php");
 include("includes/footer.php");
+ob_end_flush();
 ?>

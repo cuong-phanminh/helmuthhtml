@@ -1,13 +1,12 @@
 <?php
-session_start();
-include("./includes/db.inc.php");
+$query = "SELECT * FROM users";
+$query_run = mysqli_query($conn, $query);
 
-if($connection)
+if ($_SESSION['username']) 
 {
-    // echo "Database Connected";
-}
-else
+    
+}else
 {
-    header("Location: database/dbconfig.php");
-}
+	header("location:login.php");
+	}
 ?>

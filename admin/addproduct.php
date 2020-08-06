@@ -1,8 +1,8 @@
 <?php
 
-include("./includes/db.inc.php");
-include("./includes/header.php");
-include("./includes/navbar.php");
+include("includes/db.inc.php");
+include("includes/header.php");
+include("includes/navbar.php");
 
 
 include("./includes/configs.php");
@@ -113,7 +113,7 @@ if (isset($_POST["addproductSubmit"])) {
 
         
 
-        $query = "INSERT INTO productss (child_cate_id,product_name) 
+        $query = "INSERT INTO products (child_cate_id,product_name) 
   			  VALUES('$productCategory','$productName')";
                 mysqli_query($conn, $query);
                 // $_SESSION['success'] = "You are now added in";
@@ -127,7 +127,7 @@ if (isset($_POST["addproductSubmit"])) {
                 if ($conn->query($query) === true) {
                     $last_id = $conn->insert_id;
                     
-                    $query_product_detailss = "INSERT INTO product_detailss (product_id,quantity,price,model_year,descriptions) 
+                    $query_product_detailss = "INSERT INTO product_details (product_id,quantity,price,model_year,descriptions) 
                     VALUES('$last_id','$productQuantity','$productPrice','$productModelyear','$productDescription')";
                     mysqli_query($conn, $query_product_detailss);
                     // $_SESSION['success'] = "You are now added in";
@@ -211,11 +211,7 @@ if (isset($_POST["addproductSubmit"])) {
                                                 echo "No Record Found";
                                             }
                                             ?>
-
                                             </select>
-
-
-
 
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-product"

@@ -1,5 +1,5 @@
 <?php
-include("./admin/includes/db.inc.php");
+include("admin/includes/db.inc.php");
 include("header.php");
 //get child_cate_name in url 
 $child_cate_name = $_GET['child_category'];
@@ -31,71 +31,68 @@ $child_cate_name = $_GET['child_category'];
                         FROM
                         child_category
                         INNER JOIN
-                        productss USING (child_cate_id )
+                        products USING (child_cate_id )
                         INNER JOIN
-                        product_detailss USING (product_id )
+                        product_details USING (product_id )
                         INNER JOIN
                         prooduct_image_relationship USING (product_dt_id  )
                         INNER JOIN
-                        images USING (img_id  ) where child_cate_name = '$child_cate_name'
+                        images USING (img_id) where child_cate_name = '$child_cate_name'
                         ORDER BY 
                             product_id";
                         $query_run = mysqli_query($conn, $query);
                         
-                        ?>
+                    ?>
 
                     <div class="product-listing-inner products">
                         <?php
-                                    if(mysqli_num_rows($query_run) > 0)        
-                                    {
-                                        while($row = mysqli_fetch_assoc($query_run))
-                                        {
-                                        ?>
-
-                        <div class="product-item poly-furniture">
-
-                            <a href="#" class="product__link"></a>
-                            <div class="product-item-inner">
-                                <a href="#" class="product__link">
-                                </a>
-                                <a href="/product-detail.php?child_cate_name=<?php  echo $child_cate_name;?>&&product_id=<?php  echo $row['product_dt_id']; ?>">
-                                    <img alt="Swing Chains" src="<?php  echo "/src/images/".$row['img_url']; ?>">
-                                </a>
-
-                                <div class="caption">
-                                    <div class="product-title">
-                                        <a href="#">
-                                            <p class="product-title"> <?php  echo $row['product_name']; ?></p>
-                                        </a>
-                                    </div>
-                                    <div class="product-subtitle">
-                                        <div class="price">
-                                            <span
-                                                class="price-currencySymbol">$</span><?php  echo $row['price']; ?></span></span>
-                                        </div>
-                                        <form action="#" class="cart" method="post" enctype="multipart/form-data">
-                                            <input type="number" step="1" min="0" name="quantity" value="1" title="Qty"
-                                                class="form-control input-text qty pull-left" size="4">
-                                            <button type="submit" class="btn add-to-cart ">Add to cart</button>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                                    } 
-                                }
-                                else {
-                                    echo "No Record Found";
-                                }
+                            if(mysqli_num_rows($query_run) > 0)        
+                            {
+                                
+                                while($row = mysqli_fetch_assoc($query_run))
+                                {
                                 ?>
+                                    <div class="product-item poly-furniture">
 
+                                        <a href="#" class="product__link"></a>
+                                        <div class="product-item-inner">
+                                            <a href="#" class="product__link">
+                                            </a>
+                                            <a href="/product-detail.php?child_cate_name=<?php  echo $child_cate_name;?>&&product_id=<?php  echo $row['product_dt_id']; ?>">
+                                                <img alt="Swing Chains" src="<?php  echo "/src/images/".$row['img_url']; ?>">
+                                            </a>
+
+                                            <div class="caption">
+                                                <div class="product-title">
+                                                    <a href="#">
+                                                        <p class="product-title"> <?php  echo $row['product_name']; ?></p>
+                                                    </a>
+                                                </div>
+                                                <div class="product-subtitle">
+                                                    <div class="price">
+                                                        <span
+                                                            class="price-currencySymbol">$</span><?php  echo $row['price']; ?></span></span>
+                                                    </div>
+                                                    <form action="#" class="cart" method="post" enctype="multipart/form-data">
+                                                        <input type="number" step="1" min="0" name="quantity" value="1" title="Qty"
+                                                            class="form-control input-text qty pull-left" size="4">
+                                                        <button type="submit" class="btn add-to-cart ">Add to cart</button>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                        <?php
+                                } 
+                            }
+                        else {
+                            echo "No Record Found";
+                            }
+                        ?>
 
                     </div>
             </main><!-- /.main -->
-
-
 
             <div class="clearfix"></div>
         </div>

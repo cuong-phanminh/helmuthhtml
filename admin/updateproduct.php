@@ -15,7 +15,7 @@ if (isset($_POST["updatepproductSubmit"])) {
     /*
      * Read posted values.
      */
-    
+
     // $productName = isset($_POST['name']) ? $_POST['name'] : '';
     // $productCategory = isset($_POST['categories']) ? $_POST['categories'] : '';
     // $productQuantity = isset($_POST['quantity']) ? $_POST['quantity'] : 0;
@@ -28,7 +28,7 @@ if (isset($_POST["updatepproductSubmit"])) {
     $productQuantity = $_POST['update_quantity'];
     $productDescription = $_POST['update_description'];
     $productModelyear = $_POST['update_modelyear'];
-    $productImage = "/src/images/".$_POST['update_image'];
+    $productImage = "/src/images/" . $_POST['update_image'];
     $productPrice = $_POST['price'];
 
 
@@ -111,59 +111,58 @@ if (isset($_POST["updatepproductSubmit"])) {
      */
     if (!isset($errors)) {
 
-        
+
 
         $query = "INSERT INTO productss (child_cate_id,product_name) 
   			  VALUES('$productCategory','$productName')";
-                mysqli_query($conn, $query);
-                // $_SESSION['success'] = "You are now added in";
+        mysqli_query($conn, $query);
+        // $_SESSION['success'] = "You are now added in";
 
 
         $query_img = "INSERT INTO images (img_url) 
                 VALUES('$productImage')";
-                mysqli_query($conn, $query_img);
-                // $_SESSION['success'] = "You are now added in";
+        mysqli_query($conn, $query_img);
+        // $_SESSION['success'] = "You are now added in";
 
-                if ($conn->query($query) === true) {
-                    $last_id = $conn->insert_id;
-                    
-                    $query_product_detailss = "INSERT INTO product_detailss (product_id,quantity,price,model_year,descriptions) 
+        if ($conn->query($query) === true) {
+            $last_id = $conn->insert_id;
+
+            $query_product_detailss = "INSERT INTO product_detailss (product_id,quantity,price,model_year,descriptions) 
                     VALUES('$last_id','$productQuantity','$productPrice','$productModelyear','$productDescription')";
-                    mysqli_query($conn, $query_product_detailss);
-                    // $_SESSION['success'] = "You are now added in";
-                }
-                if ($conn->query($query_product_detailss) === true) {
-                    $last_product_dt_id = $conn->insert_id;
-                    if ($conn->query($query_img) === true) {
-                        $last_img_id = $conn->insert_id;
-                        echo $last_product_dt_id;   
-                    
-                    $query_prooduct_image_relationship = "INSERT INTO prooduct_image_relationship (product_dt_id,img_id) 
+            mysqli_query($conn, $query_product_detailss);
+            // $_SESSION['success'] = "You are now added in";
+        }
+        if ($conn->query($query_product_detailss) === true) {
+            $last_product_dt_id = $conn->insert_id;
+            if ($conn->query($query_img) === true) {
+                $last_img_id = $conn->insert_id;
+                echo $last_product_dt_id;
+
+                $query_prooduct_image_relationship = "INSERT INTO prooduct_image_relationship (product_dt_id,img_id) 
                     VALUES('$last_product_dt_id','$last_img_id')";
-                    mysqli_query($conn, $query_prooduct_image_relationship);
-                    // $_SESSION['success'] = "You are now added in";
-                }
-            }?>
-<script>
-if (window.history.replaceState) {
-    window.history.replaceState(null, null, window.location.href);
-}
-</script>
+                mysqli_query($conn, $query_prooduct_image_relationship);
+                // $_SESSION['success'] = "You are now added in";
+            }
+        } ?>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
 <?php
-            } else {
-                echo "Error: Add unsuccess " . $conn->error;
-                }
-              
+    } else {
+        echo "Error: Add unsuccess " . $conn->error;
+    }
 }
 ?>
 
 
 <?php
 if (isset($_POST['edit_btn'])) {
-$edit_id = $_POST['edit_id'];
+    $edit_id = $_POST['edit_id'];
 }
 
-    $query = " SELECT
+$query = " SELECT
     product_id,
     model_year,
     child_cate_id,
@@ -176,15 +175,15 @@ $edit_id = $_POST['edit_id'];
     FROM
     child_category
     INNER JOIN
-    productss USING (child_cate_id )
+    products USING (child_cate_id )
     INNER JOIN
-    product_detailss USING (product_id )
+    product_details USING (product_id )
     INNER JOIN
     prooduct_image_relationship USING (product_dt_id  )
     INNER JOIN
     images USING (img_id  )
     where product_id = '$edit_id'";
-    $query_run = mysqli_query($conn, $query);
+$query_run = mysqli_query($conn, $query);
 
 ?>
 
@@ -197,17 +196,14 @@ $edit_id = $_POST['edit_id'];
     <div id="content">
 
         <?php
-       include("includes/topbar.php")
-       ?>
-
+        include("includes/topbar.php")
+        ?>
         <!-- Begin Page Content -->
         <div class="container-fluid">
             <!-- Data table example  -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary"> Update product
-
-                    </h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Update product </h6>
                 </div>
 
                 <div id="addproduct">
@@ -220,56 +216,41 @@ $edit_id = $_POST['edit_id'];
                                             <h1 class="h4 text-gray-900 mb-4">Update Product!</h1>
                                         </div>
                                         <?php
-                                            if(mysqli_num_rows($query_run) > 0)        
-                                            {
-                                                while($row = mysqli_fetch_assoc($query_run))
-                                                {
-                                                   
-                                                
-                                            ?>
-                                        <form class="product" action="" method="POST">
+                                        if (mysqli_num_rows($query_run) > 0) {
+                                            while ($row = mysqli_fetch_assoc($query_run)) {
+                                        ?>
+                                                <form class="product" action="" method="POST">
 
-                                            <div class="form-group">
-                                                <input type="text" class="form-control form-control-product"
-                                                    name="update_productname" id="productname" 
-                                                     value="<?php echo $row['product_name']; ?>" placeholder="Product name">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="number" class="form-control form-control-product"
-                                                    name="update_quantity" id="quantity"  value="<?php echo $row['quantity']; ?>" placeholder="Quantity">
-                                            </div>
-                                            <div class="form-group ">
-                                                <input type="text" class="form-control form-control-product"
-                                                    name="update_price" id="price"  value="<?php echo $row['price']; ?>" placeholder="Price">
-                                            </div>
-                                            <div class="form-group ">
-                                                <input type="date" class="form-control form-control-product"
-                                                    name="update_modelyear" id="modelyear"  value="<?php echo $row['model_year']; ?>" placeholder="Model year">
-                                            </div>
-                                            <div class="form-group ">
-                                                <input type="file" class="form-control form-control-product"
-                                                    name="update_image" id="image"  value="<?php echo $row['img_url']; ?>" placeholder="Product Image">
-                                            </div>
-                                            <div class="form-group ">
-                                                <input type="textarea" style="min-height: 50px;"
-                                                    class="form-control form-control-product" name="update_description"
-                                                    id="description"  value="<?php echo $row['descriptions']; ?>" placeholder="Description">
-                                            </div>
-                                            <button type="submit" name="updateproductSubmit"
-                                                class="btn btn-primary btn-user btn-block">Add Product</button>
-                                            <hr>
-                                        </form>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control form-control-product" name="update_productname" id="productname" value="<?php echo $row['product_name']; ?>" placeholder="Product name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control form-control-product" name="update_quantity" id="quantity" value="<?php echo $row['quantity']; ?>" placeholder="Quantity">
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <input type="text" class="form-control form-control-product" name="update_price" id="price" value="<?php echo $row['price']; ?>" placeholder="Price">
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <input type="date" class="form-control form-control-product" name="update_modelyear" id="modelyear" value="<?php echo $row['model_year']; ?>" placeholder="Model year">
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <input type="file" class="form-control form-control-product" name="update_image" id="image" value="<?php echo $row['img_url']; ?>" placeholder="Product Image">
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <input type="textarea" style="min-height: 50px;" class="form-control form-control-product" name="update_description" id="description" value="<?php echo $row['descriptions']; ?>" placeholder="Description">
+                                                    </div>
+                                                    <button type="submit" name="updateproductSubmit" class="btn btn-primary btn-user btn-block">Add Product</button>
+                                                    <hr>
+                                                </form>
                                         <?php
-                                                  }  
-                                                }
-                                        else {
+                                            }
+                                        } else {
                                             echo "No Record Found";
                                         }
                                         ?>
                                         <hr>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"><a href="products.php"
-                                                    style="color:#fff">Close</a></button>
+                                            <button type="button" class="btn btn-secondary"><a href="products.php" style="color:#fff">Close</a></button>
                                             <!-- <button type="submit" class="btn btn-primary">Save</button> -->
 
                                         </div>
@@ -285,6 +266,6 @@ $edit_id = $_POST['edit_id'];
 
 
                 <?php
-include("includes/script.php");
-include("includes/footer.php");
-?>
+                include("includes/script.php");
+                include("includes/footer.php");
+                ?>
