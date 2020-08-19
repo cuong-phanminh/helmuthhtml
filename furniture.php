@@ -98,9 +98,7 @@ include("./admin/includes/db.inc.php");
                                             <h3 class="cat-title"><?php  echo $row['parent_cate_name']; ?></h3>
                                             <div class="description">
                                                 <p><?php  echo $row['slug_parent_cate']; ?></p>
-                                                <p><a href="/our-furniture.php/"><span style="text-decoration: underline;"><span
-                                                                style="color: #871211;font-weight: 500;">Buy furniture from our
-                                                                online store here.</span></span></a></p>
+                                                <p><a href="/our-furniture.php/"><span>Buy furniture from our online store here.</span></a></p>
                                             </div>
                                         <?php
                                             }

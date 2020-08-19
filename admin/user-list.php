@@ -84,13 +84,6 @@ include("security.php");
 
                                                 </form>
                                             </td>
-                                            <!-- <td>
-                                                <form action="" method="post">
-                                                    <input type="hidden" name="delete_id" value="<?php echo $row['user_id']; ?>">
-                                                    <button type="submit" name="delete_btn" class="btn btn-danger">
-                                                        DELETE</button>
-                                                </form>
-                                            </td> -->
                                         </tr>
                                 <?php
                                         $stt = $stt + 1;;
@@ -178,6 +171,6 @@ include("security.php");
 
 <?php
     include("includes/script.php");
-    include("includes/footer.php");
+    // include("includes/footer.php");
     ob_flush();
 ?>

@@ -5,9 +5,10 @@ body{
 @font-face {font-family: "Alternate Gothic No1 D"; src: url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.eot"); src: url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.woff") format("woff"), url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/173aa2c75698b66f4ebbd3b63f4b8030.svg#Alternate Gothic No1 D") format("svg"); }
 
 html {
-    font-size: 10px;
+    font-size: 16px;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    font-family: "Alternate Gothic No1 D";
+    font-family: "futura-pt",sans-serif;
+    /* font-family: "Alternate Gothic No1 D"; */
 }
 
 /* font-face {
@@ -18,12 +19,32 @@ html {
    } */
 
 .header-inner {
+    /* position: fixed;
+    top: 0;
+    background: #fff;
+    z-index: 999; */
+    width: 90%;
     padding: 0 5%;
     /* display: -ms-flexbox; */
     display: flex;
     justify-content: space-between;
     align-content: center;
     padding-bottom: 19px;
+}
+.cart-badge {
+    font-family: 'futura-pt';
+    position: absolute;
+    min-width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background-color: #73100F;
+    font-size: 11px;
+    text-align: center;
+    line-height: 17px;
+    letter-spacing: 0.05em;
+    color: #FFF;
+    top: 10px;
+    /* right: 15px; */
 }
 .navbar-header{
 width: 20%;
@@ -95,14 +116,14 @@ line-height: 40px;
     text-decoration: none;
     color: #231F20;
     display: block;
-width: max-content;
+    width: max-content;
     font-size: 20px;
     line-height: normal;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    /*  */
+    font-family: "Alternate Gothic No1 D";
     color: #231F20 !important;
-    padding: 17px 26px;
+    padding: 10px 18px;
 }
 
 .dropdown-menu{
@@ -116,8 +137,9 @@ background: #F1F1F1;
 }
 
 /* fix nav */
-.navbar-collapse.fixed-nav {
-    position: fixed;
+.fixed-nav {
+        position: fixed;
+        background: #fff;
         right: 0;
         padding: 0 5%;
         display: flex;
@@ -126,18 +148,25 @@ background: #F1F1F1;
         padding-bottom: 8px;
         top: 0;
         z-index: 3;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     
+}
+
+.topbar_none{
+    display: none;
 }
 
 .hero-menu.fixed-hero-menu {
     position: fixed;
-        right: 0;
-        padding: 0 5%;
-        display: flex;
-        justify-content: space-between;
-        align-content: center;
-        padding-bottom: 8px;
-        top: 90px;width: 84%;
+    right: 0;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding-bottom: 8px;
+    top: 90px;
+    width: 84%;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     
 }
 
@@ -245,16 +274,7 @@ li.shopping-cart > a > img{
     transform: translate(-50%, -50%);
  }  
 
-/* .content .section .section-slider iframe{
-        
-    height: calc(100vh - 270px);
-} */
 
-/* .content .section .section-inner .section-content{
-    position: absolute;
-    z-index: 1;
-    padding-left: 60px;
-} */
 
 .content .section .section-inner .section-content > h1 {
     font-size: 100px;
@@ -266,6 +286,11 @@ li.shopping-cart > a > img{
     background-color: black;
 }
 
+.description span{
+    font-family: "Alternate Gothic No1 D";
+    color: #871211;
+    font-weight: 500;
+}
 
 /* hero-menu  */
 
@@ -284,7 +309,7 @@ li.shopping-cart > a > img{
 }
 
 .hero-menu #hero-menu-iterm li a {
-    /*  */
+    font-family: "Alternate Gothic No1 D";
     color: #FFF;
     font-size: 40px;
     letter-spacing: 0.05em;
@@ -313,6 +338,7 @@ li.shopping-cart > a > img{
 .section-title, .about-page .section-sub-title strong, .building-options h2, section.contact .section-title {
     font-size: 70px;
     text-align: center;
+    font-family: "Alternate Gothic No1 D";
 }
 
 
@@ -337,7 +363,7 @@ li.shopping-cart > a > img{
 
 .wrap-grid .grid-title {
     font-size: 30px;
-    /*  */
+    font-family: "Alternate Gothic No1 D";
     margin: 0;
     font-style: normal;
 }
@@ -398,7 +424,7 @@ li.shopping-cart > a > img{
     padding: 0 !important;
     font-size: 20px;
     color: #231F20;
-    /*  */
+    font-family: "Alternate Gothic No1 D";
     margin: 4px 30px 0 30px !important;
     letter-spacing: 0.05em;
     border-bottom: 3px solid #fff;
@@ -439,11 +465,16 @@ li.shopping-cart > a > img{
     padding-left: 5%;
    
 }
-.testimonial-content-wrap .section-title{
-    text-align: left;
-    font-size: 50px;
+.section-title {
+    font-size: 100px;
+    line-height: 1.48em;
+    letter-spacing: 0.05em;
+    color: #231F20;
+    text-transform: uppercase;
+    font-weight: 400;
+    position: relative;
+    margin: 20px 0 10px;
 }
-
 .testimonial-title{
     font-size: 18px;
 }
@@ -451,7 +482,7 @@ li.shopping-cart > a > img{
     font-size: 250px;
     color: rgba(35, 31, 32, 0.06);
     letter-spacing: 0.05em;
-    /*  */
+    font-family: "Alternate Gothic No1 D";
     line-height: 150px;
     position: absolute;
     z-index: -2;
@@ -621,7 +652,7 @@ section.contact .contact-f textarea {
     background-color: transparent !important;
     border-bottom: 2px solid #FFF;
     padding: 0 15px;
-    /*  */
+    font-family: "Alternate Gothic No1 D";
     font-size: 32px;
     letter-spacing: 0.05em;
     line-height: 38px;
@@ -651,12 +682,12 @@ section.contact .contact-f textarea {
 }
 
 section.contact .section-content strong {
+    font-family: "Alternate Gothic No1 D";
     margin: 40px 0 30px 0;
     display: block;
     font-weight: 400;
-    color: #FFF;
-    font-size: 23px;
-    /* font-size: 40px; */
+    color: #FFF;    
+    font-size: 35px;
     line-height: normal;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -761,7 +792,7 @@ footer#page-footer #copyright-bar img {
     background: transparent;
 }
 .is_fixed ul li a {
-    
+    font-family: "Alternate Gothic No1 D";
     color: #000;
     font-size: 40px;
     letter-spacing: 0.05em;
@@ -793,7 +824,7 @@ footer#page-footer #copyright-bar img {
     z-index: 2;
     background-size: cover;
     min-height: 210px;
-    background: url(./src/images/banner_default.jpg) no-repeat center;
+    background: url(../src/images/banner_default.jpg) no-repeat center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -808,7 +839,7 @@ footer#page-footer #copyright-bar img {
     letter-spacing: 0.05em;
     color: #FFFFFF;
     margin: 0;
-    
+    font-family: "Alternate Gothic No1 D";
 }
 
 
@@ -844,6 +875,7 @@ footer#page-footer #copyright-bar img {
 }
 
 .one-child .sub-category-item h3.cat-title, .popup-content .one-child h3.cat-title {
+    font-family: "Alternate Gothic No1 D";
     position: relative;
     color: #231F20;
     padding: 0;
@@ -914,7 +946,7 @@ body .product-item .caption {
     font-size: 29px;
     color: #871211;
     text-transform: uppercase;
-    
+    font-family: "Alternate Gothic No1 D";
     letter-spacing: 0.05em;
 }
 
@@ -926,7 +958,7 @@ body .product-item .caption {
 .page-title{
     font-size: 120px;
     color: #871211;
-    
+    font-family: "Alternate Gothic No1 D";
     line-height: 100px;
     margin-bottom: 20px;
     margin-top: 0;
@@ -1082,7 +1114,7 @@ body .product-item .caption {
 .entry-title {
     font-size: 48px;
     color: #871211;
-    
+    font-family: "Alternate Gothic No1 D";
     line-height: 48px;
     margin-bottom: 20px;
     margin-top: 0;
@@ -1146,6 +1178,7 @@ th {
 }
 
 .product-thumbnail img {
+    float: left;
     max-width: 100%;
     height: auto;
 }
@@ -1166,7 +1199,32 @@ hr{
     padding: 13px 30px;
     font-size: 16px;
 }
+ .cart .cart-empty {
+    text-align: center;
+    line-height: 80px;
+    font-size: 80px;
+    background: transparent;
+    border: none;
+    color: #c1c1c1;
+    padding-top: 5%;
+    font-family: "Alternate Gothic No1 D",sans-serif;
+}
 
+.cart .return-to-shop {
+    text-align: center;
+}
+.cart .return-to-shop a {
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    color: #871211;
+    font-size: 18px;
+    display: inline-block;
+    width: auto;
+}
+.cart .return-to-shop a:hover{
+    text-decoration: none;
+}
 
 
 
@@ -1187,7 +1245,7 @@ hr{
     float: left;
 }
 
-.billing-fields h3, .checkbox{
+.billing-fields h3, .shipping-fields h3{
     line-height: 48px;
     font-size: 48px;
     color: #871211;
@@ -1295,4 +1353,62 @@ th, td {
     float: right;
     border: navajowhite;
     color: #fff;
+}
+
+.place-order input:hover{
+    text-transform: uppercase;
+    background-color: #484848;
+    padding: 13px 30px;
+    float: right;
+    border: navajowhite;
+    color: #fff;
+}
+
+.pull-right{
+    float: unset;
+}
+
+.alert-info li{
+    font-size: 16px;
+    color: #871211;
+    font-family: "futura-pt",sans-serif;
+}
+
+
+.billing-fields h3, .shipping-fields h3 {
+    line-height: 48px;
+    font-size: 48px;
+    color: #871211;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: 400;
+    position: relative;
+    font-family: "Alternate Gothic No1 D";
+}
+#order_review_heading {
+    font-family: "Alternate Gothic No1 D";
+    line-height: 48px;
+    font-size: 48px;
+    color: #871211;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: 400;
+    width: 100%;
+    overflow: hidden;
+}
+.shop_table thead {
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+
+.title-thanks h1{
+    text-align: center;
+    line-height: 80px;
+    font-size: 80px;
+    background: transparent;
+    border: none;
+    color: #c1c1c1;
+    padding-top: 5%;
+    font-family: "Alternate Gothic No1 D",sans-serif;
 }

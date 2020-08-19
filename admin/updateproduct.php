@@ -4,10 +4,7 @@ include("./includes/db.inc.php");
 include("./includes/header.php");
 include("./includes/navbar.php");
 
-
 include("./includes/configs.php");
-
-
 
 $productSaved = FALSE;
 
@@ -16,13 +13,6 @@ if (isset($_POST["updatepproductSubmit"])) {
      * Read posted values.
      */
 
-    // $productName = isset($_POST['name']) ? $_POST['name'] : '';
-    // $productCategory = isset($_POST['categories']) ? $_POST['categories'] : '';
-    // $productQuantity = isset($_POST['quantity']) ? $_POST['quantity'] : 0;
-    // $productDescription = isset($_POST['description']) ? $_POST['description'] : '';
-    // $productModelyear = isset($_POST['modelyear']) ? $_POST['modelyear'] : '';
-    // $productImage = isset($_POST['image']) ? $_POST['image'] : '';
-    // $productPrice = isset($_POST['price']) ? $_POST['price'] : '';
     $productName = $_POST['update_productname'];
     $productCategory = $_POST['update_child_category'];
     $productQuantity = $_POST['update_quantity'];
@@ -154,10 +144,7 @@ if (isset($_POST["updatepproductSubmit"])) {
         echo "Error: Add unsuccess " . $conn->error;
     }
 }
-?>
 
-
-<?php
 if (isset($_POST['edit_btn'])) {
     $edit_id = $_POST['edit_id'];
 }

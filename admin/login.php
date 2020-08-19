@@ -1,6 +1,5 @@
 <?php
 ob_start();
-
 include("includes/db.inc.php");
 include("includes/header.php");
 

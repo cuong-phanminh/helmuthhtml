@@ -1,39 +1,41 @@
+<?php
+    session_start();    
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helmuth</title>
     <link rel="stylesheet" href="/src/styles.css">
-    <link href="http://db.onlinewebfonts.com/c/173aa2c75698b66f4ebbd3b63f4b8030?family=Alternate+Gothic+No1+D" rel="stylesheet" type="text/css"/>
+    <link href="http://db.onlinewebfonts.com/c/173aa2c75698b66f4ebbd3b63f4b8030?family=Alternate+Gothic+No1+D" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="header-inner">
-        <div id="fixed-navbar" class="navbar-header">
-            <a class="navbar-brand logo" href="#"><img id="site-logo"
-                    src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2019/08/HelmuthBuider_logo.svg"
-                    alt="Helmuth Builders">
+    <div id="fixed-navbar" class="header-inner">
+        <div  class="navbar-header">
+            <a class="navbar-brand logo" href="#"><img id="site-logo" src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2019/08/HelmuthBuider_logo.svg" alt="Helmuth Builders">
             </a>
         </div>
         <div class="navbar-right">
-            <div class="header-topbar">
+            <div id="header-topbar" class="header-topbar">
                 <div class="right">
 
                     <div class="chanel-social">
-                        <a target="_blank" class="chanel chanel-facebook"
-                            href="https://www.facebook.com/HelmuthBuildersInc/">
+                        <a target="_blank" class="chanel chanel-facebook" href="https://www.facebook.com/HelmuthBuildersInc/">
                             <img src="/src/images/facebook.svg" alt="facebook">
                         </a>
-                        <a target="_blank" class="chanel chanel-instagram"
-                            href="https://www.instagram.com/helmuthbuilders/">
+                        <a target="_blank" class="chanel chanel-instagram" href="https://www.instagram.com/helmuthbuilders/">
                             <img src="/src/images/instagram.svg" alt="instagram">
                         </a>
                         <a target="_blank" class="chanel chanel-twitter" href="https://twitter.com/helmuthbuilders">
                             <img src="/src/images/twitter.svg" alt="twitter">
                         </a>
-                        <a target="_blank" class="chanel chanel-google"
-                            href="https://plus.google.com/u/0/111509630275663484126">
+                        <a target="_blank" class="chanel chanel-google" href="https://plus.google.com/u/0/111509630275663484126">
                             <img src="/src/images/google-plus.svg" alt="">
                         </a>
                     </div>
@@ -51,13 +53,12 @@
             </div>
 
             <nav id="fixed-navbar" class="nav-main navbar-collapse collapse" role="navigation">
-                <ul id="menu-main-menu" class="navbar-nav nav pull-right">
+                <ul id="menu-main-menu" class="navbar-nav nav">
                     <li class="menu-item menu-home active">
                         <a title="Home" href="index.php">Home</a>
                     </li>
                     <li class="menu-item menu-products dropdown">
-                        <a class="menu-item-link-products" title="Products" href="/furniture.php" class="dropdown-toggle"
-                            aria-haspopup="true">Products
+                        <a class="menu-item-link-products" title="Products" href="/furniture.php" class="dropdown-toggle" aria-haspopup="true">Products
                             <span class="caret"></span>
                         </a>
                         <ul role="menu" class=" dropdown-menu">
@@ -76,8 +77,7 @@
                         </ul>
                     </li>
                     <li class="menu-item menu-services dropdown">
-                        <a class="menu-item-link-services" title="Services" href="#" class="dropdown-toggle"
-                            aria-haspopup="true">Services
+                        <a class="menu-item-link-services" title="Services" href="#" class="dropdown-toggle" aria-haspopup="true">Services
                             <span class="caret"></span>
                         </a>
                         <ul role="menu" class=" dropdown-menu">
@@ -93,8 +93,7 @@
                         </ul>
                     </li>
                     <li class="menu-item menu-about-us dropdown">
-                        <a class="menu-item-link-about-us" title="About Us" href="#" class="dropdown-toggle"
-                            aria-haspopup="true">About Us
+                        <a class="menu-item-link-about-us" title="About Us" href="#" class="dropdown-toggle" aria-haspopup="true">About Us
                             <span class="caret"></span>
                         </a>
                         <ul role="menu" class=" dropdown-menu">
@@ -113,8 +112,7 @@
                         </ul>
                     </li>
                     <li class="menu-item menu-how-it-works dropdown">
-                        <a class="menu-item-link-how-it-works" title="How It Works" href="#" class="dropdown-toggle"
-                            aria-haspopup="true">How It
+                        <a class="menu-item-link-how-it-works" title="How It Works" href="#" class="dropdown-toggle" aria-haspopup="true">How It
                             Works <span class="caret"></span>
                         </a>
                         <ul role="menu" class=" dropdown-menu">
@@ -133,8 +131,7 @@
                         <a title="Contact" href="#">Contact</a>
                     </li>
                     <li class="menu-item  menu-call-us dropdown">
-                        <a class="menu-item-link-call-us" title="Call Us" href="#" class="dropdown-toggle"
-                            aria-haspopup="true">Call Us
+                        <a class="menu-item-link-call-us" title="Call Us" href="#" class="dropdown-toggle" aria-haspopup="true">Call Us
                             <span class="caret"></span>
                         </a>
                         <ul role="menu" class=" dropdown-menu">
@@ -150,14 +147,33 @@
                         </ul>
                     </li>
                     <li class="menu-item shopping-cart">
-                        <a href="/cart/">
+                        <a href="/cart.php">
                             <img src="/src/images/shopping-cart.png" alt="cart">
+                            <span class="cart-badge">
+                                <?php
+                                    if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+                                        $totalquantity = 0;
+                                        foreach ($_SESSION['cart'] as $key => $value) {
+
+                                            $totalquantity = $totalquantity + $_SESSION['cart'][$key]["item_quantity"];
+                                        }
+                                    } else {
+                                        $totalquantity = 0;
+                                    }
+                                    if( $totalquantity == 0 ){
+                                        unset($_SESSION['cart']);
+                                    }
+                                    echo $totalquantity;
+                                ?>
+                            </span>
+
                         </a>
                     </li>
                 </ul>
             </nav>
         </div>
     </div>
-    
+
 </body>
+
 </html>

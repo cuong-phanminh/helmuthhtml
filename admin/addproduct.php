@@ -143,7 +143,8 @@ if (isset($_POST["addproductSubmit"])) {
                     mysqli_query($conn, $query_prooduct_image_relationship);
                     // $_SESSION['success'] = "You are now added in";
                 }
-            }?>
+            }
+            ?>
             <script>
             if ( window.history.replaceState ) {
                 window.history.replaceState( null, null, window.location.href );

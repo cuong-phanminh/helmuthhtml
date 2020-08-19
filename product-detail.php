@@ -4,8 +4,6 @@ include("header.php");
 //get child_cate_name in url 
 $child_cate_name = $_GET['child_cate_name'];
 $product_dt_id1 = $_GET['product_id'];
-// echo $child_cate_name;
-// die();
 
 ?>
 
@@ -14,7 +12,7 @@ $product_dt_id1 = $_GET['product_id'];
 <main class="main col-sm-12" role="main">
     <div class="col-sm-12" id="col-sm-12">
         <?php
-            $query = " SELECT 
+        $query = " SELECT 
             product_dt_id,
             product_name,
             price,
@@ -23,68 +21,59 @@ $product_dt_id1 = $_GET['product_id'];
             FROM
             child_category
             INNER JOIN
-            productss USING (child_cate_id )
+            products USING (child_cate_id )
             INNER JOIN
-            product_detailss USING (product_id )
+            product_details USING (product_id )
             INNER JOIN
             prooduct_image_relationship USING (product_dt_id  )
             INNER JOIN
             images USING (img_id  ) where child_cate_name = '$child_cate_name'
             ORDER BY 
                 product_id";
-            $query_run = mysqli_query($conn, $query);
-        
+        $query_run = mysqli_query($conn, $query);
+
         ?>
         <?php
-            if(mysqli_num_rows($query_run) > 0)        
-            {
-                while($row = mysqli_fetch_assoc($query_run))
-                {
-                    
-                    if($row['product_dt_id']==$product_dt_id1){
-                
-            ?>
+        if (mysqli_num_rows($query_run) > 0) {
+            while ($row = mysqli_fetch_assoc($query_run)) {
 
-        <div class="top-content">
-            <div class="col-md-6" id="product-image">
-                <div class="product-gallery  images" data-columns="4"
-                    style="opacity: 1; transition: opacity 0.25s ease-in-out 0s;">
-                    <figure class="product-gallery__wrapper">
-                        <div class="product-gallery__image">
-                            <a href="#" class="fancybox image"><img width="800" height="600"
-                                    src="<?php  echo "/src/images/".$row['img_url']; ?>" class="wp-post-image"
-                                    alt="Swing Chains"=""="">
-                            </a>
+                if ($row['product_dt_id'] == $product_dt_id1) {
+
+        ?>
+
+                    <div class="top-content">
+                        <div class="col-md-6" id="product-image">
+                            <div class="product-gallery  images" data-columns="4" style="opacity: 1; transition: opacity 0.25s ease-in-out 0s;">
+                                <figure class="product-gallery__wrapper">
+                                    <div class="product-gallery__image">
+                                        <a href="#" class="fancybox image"><img width="800" height="600" src="<?php echo "/src/images/" . $row['img_url']; ?>" class="wp-post-image" alt="Swing Chains"=""="">
+                                        </a>
+                                    </div>
+                                </figure>
+                            </div>
                         </div>
-                    </figure>
-                </div>
-            </div>
 
-            <div class="col-md-6" id="details-wrap">
-                <div class="details wrap">
-                    <h1 itemprop="name" class="product_title entry-title"><?php  echo $row['product_name']; ?></h1>
-                    <div itemprop="offers" itemscope="" itemtype="#">
-                        <h4 itemprop="price" class="price"><span class="price-amount amount"><span
-                                    class="price-currencySymbol">$</span><?php  echo $row['price']; ?></span></h4>
-                        <meta itemprop="priceCurrency" content="USD">
-                        <link itemprop="availability" href="#">
+                        <div class="col-md-6" id="details-wrap">
+                            <div class="details wrap">
+                                <h1 itemprop="name" class="product_title entry-title"><?php echo $row['product_name']; ?></h1>
+                                <div itemprop="offers" itemscope="" itemtype="#">
+                                    <h4 itemprop="price" class="price"><span class="price-amount amount"><span class="price-currencySymbol">$</span><?php echo $row['price']; ?></span></h4>
+                                    <meta itemprop="priceCurrency" content="USD">
+                                    <link itemprop="availability" href="#">
+                                </div>
+
+                                <form class="cart" action="#" method="post" enctype="multipart/form-data">
+                                    <div class="quantity"><input type="number" step="1" min="1" name="quantity" value="1" title="Qty" class="form-control input-text qty text input-lg pull-left" size="4"></div>
+                                    <button type="submit" name="add-to-cart" value="3932" class="single_add_to_cart_button button alt">Add to cart</button>
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
-
-                    <form class="cart" action="#" method="post" enctype="multipart/form-data">
-                        <div class="quantity"><input type="number" step="1" min="1" name="quantity" value="1"
-                                title="Qty" class="form-control input-text qty text input-lg pull-left" size="4"></div>
-                        <button type="submit" name="add-to-cart" value="3932"
-                            class="single_add_to_cart_button button alt">Add to cart</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
         <?php
-                    }
-                 }  
                 }
-        else {
+            }
+        } else {
             echo "No Record Found";
         }
         ?>
@@ -118,11 +107,9 @@ $product_dt_id1 = $_GET['product_id'];
 
             <h4 class="section-title">Related Products</h4>
 
-           
-
             <div class="product-listing-inner products">
-            <?php
-            $query = " SELECT 
+                <?php
+                $query = " SELECT 
             product_dt_id,
             product_name,
             price,
@@ -140,55 +127,46 @@ $product_dt_id1 = $_GET['product_id'];
             images USING (img_id  ) where child_cate_name = '$child_cate_name'
             ORDER BY 
                 product_id";
-            $query_run = mysqli_query($conn, $query);
-        
-        ?>
+                $query_run = mysqli_query($conn, $query);
 
-            <?php
-            if(mysqli_num_rows($query_run) > 0)        
-            {
-                while($row = mysqli_fetch_assoc($query_run))
-                {
-                    if($row['product_dt_id']!=$product_dt_id1){
-                 
-            ?>
+                ?>
 
-                <div class="col-md-3 product-item  poly-furniture">
-
-                    <a href="#" class="product__link">
-                    </a>
-                    <div class="product-item-inner"><a href="#" class="product__link">
-                        </a><a href="#">
-                            <img alt="Swing Springs"
-                                src="<?php  echo "/src/images/".$row['img_url']; ?>">
-                        </a>
-
-                        <div class="caption">
-                            <a href="#">
-                                <p class="product-title">Swing Springs</p>
-                            </a>
-                            <!-- <div class="product-subtitle"></div> -->
-                            <span hidden="" class="plain-price">20</span>
-
-                            <span class="price"><span class="price-amount amount"><span
-                                        class="price-currencySymbol">$</span>20</span></span>
-                            <form action="/furniture/swing-chains/?add-to-cart=3931" class="cart" method="post"
-                                enctype="multipart/form-data">
-                                <div class="quantity"><input type="number" step="1" min="0" name="quantity" value="1"
-                                        title="Qty" class="form-control input-text qty text input-lg pull-left"
-                                        size="4">
-                                </div><button type="submit"
-                                    class="btn add-to-cart add_to_cart_button product_type_simple">Add
-                                    to cart</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 <?php
-                            }
-                        }  
+                if (mysqli_num_rows($query_run) > 0) {
+                    while ($row = mysqli_fetch_assoc($query_run)) {
+                        if ($row['product_dt_id'] != $product_dt_id1) {
+
+                ?>
+
+                            <div class="col-md-3 product-item  poly-furniture">
+
+                                <a href="#" class="product__link">
+                                </a>
+                                <div class="product-item-inner"><a href="#" class="product__link">
+                                    </a><a href="#">
+                                        <img alt="Swing Springs" src="<?php echo "/src/images/" . $row['img_url']; ?>">
+                                    </a>
+
+                                    <div class="caption">
+                                        <a href="#">
+                                            <p class="product-title">Swing Springs</p>
+                                        </a>
+                                        <!-- <div class="product-subtitle"></div> -->
+                                        <span hidden="" class="plain-price">20</span>
+
+                                        <span class="price"><span class="price-amount amount"><span class="price-currencySymbol">$</span>20</span></span>
+                                        <form action="" class="cart" method="post">
+                                            <div class="quantity"><input type="number" step="1" min="0" name="quantity" value="1" title="Qty" class="form-control input-text qty text input-lg pull-left" size="4">
+                                            </div><button type="submit" class="btn add-to-cart add_to_cart_button product_type_simple">Add
+                                                to cart</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                <?php
                         }
-                else {
+                    }
+                } else {
                     echo "No Record Found";
                 }
                 ?>
@@ -198,10 +176,85 @@ $product_dt_id1 = $_GET['product_id'];
 
     </div>
     <meta itemprop="url" content="#">
-
 </main>
 
+<?php
+if (isset($_POST["add-to-cart"])) {
+    $product_id = $_GET["product_id"];
+    $query = "SELECT 
+        product_dt_id,
+        product_name,
+        price,
+        img_url,
+        quantity 
+        FROM
+        child_category
+        INNER JOIN
+        products USING (child_cate_id )
+        INNER JOIN
+        product_details USING (product_id )
+        INNER JOIN
+        prooduct_image_relationship USING (product_dt_id  )
+        INNER JOIN
+        images USING (img_id) where product_dt_id = " . $product_id;
 
+    $query_run = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_run)) {
+        if (isset($_SESSION["cart"])) {
+            $item_array_id = array_column($_SESSION["cart"], "product_id");
+            if (!in_array($_GET["product_id"], $item_array_id)) {
+                $count = count($_SESSION["cart"]);
+                $item_array = array(
+                    'product_id' => $_GET["product_id"],
+                    'img_url' => $row['img_url'],
+                    'product_name' => $row['product_name'],
+                    'item_quantity' => $_POST["quantity"]
+                );
+                $_SESSION["cart"][$count] = $item_array;
+            } else {
+                $cnt = 0;
+                foreach ($_SESSION["cart"] as $keys => $values) {
+
+                    if ($values["product_id"] == $_GET["product_id"]) {
+
+                        $_SESSION["cart"][$cnt]['item_quantity'] += $_POST['quantity'];
+                    }
+                    $cnt++;
+                }
+            }
+?>
+            <script>
+                if (window.history.replaceState) {
+                    window.history.replaceState(null, null, window.location.href);
+                }
+            </script>
+<?php
+        } else {
+            $item_array = array(
+                'product_id' => $_GET["product_id"],
+                'img_url' => $row['img_url'],
+                'product_name' => $row['product_name'],
+                'item_quantity' => $_POST["quantity"]
+            );
+            $_SESSION["cart"][0] = $item_array;
+        }
+         header("Refresh:0");
+    }
+   
+}
+if (isset($_GET["action"])) {
+    if ($_GET["action"] == "delete") {
+        foreach ($_SESSION["cart"] as $keys => $values) {
+            if ($values["product_id"] == $_GET["product_id"]) {
+                unset($_SESSION["cart"][$keys]);
+                echo '<script>alert("Item Removed")</script>';
+                echo '<script>window.location="index.php"</script>';
+            }
+        }
+    }
+}
+?>
 
 <?php
 include("footer.php")

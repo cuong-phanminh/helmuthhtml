@@ -117,7 +117,7 @@ include("security.php");
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="deleteproduct.php" method="post">
+                                        <form action="deleteproduct.php" method="post" onSubmit="return confirm('Bạn muốn xóa sản phẩm này?')">
                                             <input type="hidden" name="delete_id"
                                                 value="<?php echo $row['product_id']; ?>">
                                             <button type="submit" name="delete_btn" class="btn btn-danger">
@@ -130,8 +130,6 @@ include("security.php");
                                 <?php
                                  $stt=$stt+1;;
                                     } 
-                                    return $stt;
-                                    
                                 }
                                 else {
                                     echo "No Record Found";
@@ -157,7 +155,7 @@ include("security.php");
                             <form class="product" action="code.php" method="POST">
 
                                 <?php
-                                 foreach( get_category() as $category ) { ?>
+                                 foreach($get_category() as $category ) { ?>
                                 <option value="<?php echo $category;?>"><?php echo $category; ?></option>
                                 <?php }?>
 

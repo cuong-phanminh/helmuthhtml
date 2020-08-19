@@ -1,5 +1,7 @@
 <?php
-include("header.php")
+include("admin/includes/db.inc.php");
+include("header.php");
+
 ?>
 
 <div class="fluid wrap main-section" id="wrap-main-section">
@@ -12,123 +14,116 @@ include("header.php")
             <main class="main col-sm-12">
                 <div id="container">
                     <div id="main">
-                        <div class="">
-                            <form action="https://helmuthbuilders.com/cart/" method="post">
+                        <div class="cart">
+                            <?php
+                            $subtotal = 0;
+                            if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+                            ?>
+                                <form action="/checkout.php" method="post">
+
+                                    <table class="shop_table cart table" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-sm-1 product-remove"> &nbsp;</th>
+                                                <th class="col-sm-2 product-thumbnail hidden-xs"> &nbsp;</th>
+                                                <th class="col-sm-3 product-name"> Product </th>
+                                                <th class="col-sm-2 product-price"> Price </th>
+                                                <th class="col-sm-2 product-quantity"> Quantity </th>
+                                                <th class="col-sm-2 product-subtotal text-right"> Total </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                foreach ($_SESSION['cart'] as $key => $value) {
+                                                    $id = $_SESSION['cart'][$key]["product_id"];
+                                                    $quantity = $_SESSION['cart'][$key]["item_quantity"];
+                                                    $query = "SELECT * FROM product_details where product_dt_id ='$id'";
+                                                    $query_run = mysqli_query($conn, $query);
+                                                    while ($row = mysqli_fetch_assoc($query_run)) {
+                                                        $price = $row['price'];
+                                                    }
+
+                                                    $total = $quantity * $price;
+                                                    $subtotal = $subtotal + $total;
+                                                    $ordertotal = $subtotal;
+                                            ?>
+
+                                                    <tr class="cart_item">
+                                                        <td class="col-sm-1 product-remove"> <a id="<?php echo 'rm-'.$id ?>" name="remove_product" class=" btn btn-danger remove" title="Remove this item"><i class="fa fa-remove fa-2x"></i></a> </td>
+                                                        <td class="col-sm-2 product-thumbnail hidden-xs"> <img width="100" height="300" src="<?php echo "/src/images/" . ($_SESSION['cart'][$key]["img_url"]); ?>" class="" alt="" sizes="(max-width: 300px) 100vw, 300px"> </td>
+                                                        <td class="col-sm-3 product-name"><?php echo ($_SESSION['cart'][$key]["product_name"]); ?> </td>
+                                                        <td class="col-sm-2 product-price"> <span class="price-amount amount"><span class="price-currencySymbol">$</span><?php echo $price; ?></span> </td>
+                                                        <td class="col-sm-2 product-quantity">
+                                                            <div class="quantity">
+                                                                <input type="number" step="1" min="0" name="pro_quantity" id="<?php echo $id ?>" title="Qty" value="<?php echo $quantity; ?>" class="form-control input-text qty text input-lg" size="4">
+                                                            </div>
+                                                        </td>
+                                                        <td class="col-sm-2 product-subtotal text-right"> <span class="price-amount amount"><span class="price-currencySymbol">$</span><?php echo $total ?></span> </td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            ?>
 
 
-                                <table class="shop_table cart table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-sm-1 product-remove"> &nbsp;
-                                            </th>
-                                            <th class="col-sm-2 product-thumbnail hidden-xs"> &nbsp;
-                                            </th>
-                                            <th class="col-sm-3 product-name"> Product </th>
-                                            <th class="col-sm-2 product-price"> Price </th>
-                                            <th class="col-sm-2 product-quantity"> Quantity </th>
-                                            <th class="col-sm-2 product-subtotal text-right"> Total </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
 
-                                        <tr class="cart_item">
+                                            <tr>
+                                                <td colspan="6">
+                                                    <div class="cart-collaterals">
+                                                        <div class="cart_totals ">
+                                                            <!-- <h2>Cart Totals</h2> -->
+                                                            <table cellspacing="0">
+                                                                <tbody>
+                                                                    <tr class="cart-subtotal">
+                                                                        <th class="cart-subtotal">Cart Subtotal</th>
+                                                                        <td class="price-amount"><span class="price-amount amount"><span class="price-currencySymbol">$</span><?php echo $subtotal; ?></span>
+                                                                        </td>
+                                                                    </tr>
 
-                                            <td class="col-sm-1 product-remove"> <a
-                                                    href="https://helmuthbuilders.com/cart/?remove_item=c56a022b15250525f8b9bdfc41a13152&amp;_wpnonce=f9c9c30a9c"
-                                                    class="btn btn-danger remove" title="Remove this item"><i
-                                                        class="el-icon-remove"></i></a> </td>
-                                            <td class="col-sm-2 product-thumbnail hidden-xs"> <img width="300"
-                                                    height="300"
-                                                    src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2018/04/luxcraft-wood-swingchain-stainlesssteel-300x300.jpg"
-                                                    class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail wp-post-image"
-                                                    alt=""
-                                                    srcset="https://daf9p2mnm4nrk.cloudfront.net/uploads/2018/04/luxcraft-wood-swingchain-stainlesssteel-300x300.jpg 300w, https://daf9p2mnm4nrk.cloudfront.net/uploads/2018/04/luxcraft-wood-swingchain-stainlesssteel-150x150.jpg 150w, https://daf9p2mnm4nrk.cloudfront.net/uploads/2018/04/luxcraft-wood-swingchain-stainlesssteel-400x400.jpg 400w, https://daf9p2mnm4nrk.cloudfront.net/uploads/2018/04/luxcraft-wood-swingchain-stainlesssteel-100x100.jpg 100w"
-                                                    sizes="(max-width: 300px) 100vw, 300px"> </td>
-                                            <td class="col-sm-3 product-name"> Swing Chains </td>
-                                            <td class="col-sm-2 product-price"> <span class="price-amount amount"><span
-                                                        class="price-currencySymbol">$</span>65</span> </td>
-                                            <td class="col-sm-2 product-quantity">
-                                                <div class="quantity"><input type="number" step="1" min="0"
-                                                        name="cart[c56a022b15250525f8b9bdfc41a13152][qty]" value="1"
-                                                        title="Qty"
-                                                        class="form-control input-text qty text input-lg pull-left"
-                                                        size="4"></div>
-                                            </td>
-                                            <td class="col-sm-2 product-subtotal text-right"> <span
-                                                    class="price-amount amount"><span
-                                                        class="price-currencySymbol">$</span>65</span> </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6">
-                                                <div class="cart-collaterals">
-                                                    <div class="cart_totals ">
-                                                        <!-- <h2>Cart Totals</h2> -->
-                                                        <table cellspacing="0">
-                                                            <tbody>
-                                                                <tr class="cart-subtotal">
-                                                                    <th class="cart-subtotal">Cart Subtotal</th>
-                                                                    <td class="price-amount"><span
-                                                                            class="price-amount amount"><span
-                                                                                class="price-currencySymbol">$</span>65</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="shipping">
-                                                                    <th>Shipping and Handling</th>
-                                                                    <td> Free shipping <input type="hidden"
-                                                                            name="shipping_method[0]" data-index="0"
-                                                                            id="shipping_method_0"
-                                                                            value="free_shipping:4"
-                                                                            class="shipping_method">
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr class="order-total">
-                                                                    <th>Order Total</th>
-                                                                    <td><strong><span class="price-amount amount"><span
-                                                                                    class="price-currencySymbol">$</span>65</span></strong>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                                    <tr class="order-total">
+                                                                        <th>Order Total</th>
+                                                                        <td><strong><span class="price-amount amount"><span class="price-currencySymbol">$</span><?php echo $ordertotal; ?></span></strong>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6" class="actions">
-                                                <div class="col-xs-12">
-                                                    <hr>
-                                                </div>
-                                                <div class="cart-actions">
-                                                    <!-- <div class="btn-group" style="width: 100%;">
-                                                        <input type="submit" class="col-xs-6 btn btn-default "
-                                                            name="update_cart" value="Update Cart">
-                                                        <input type="submit"
-                                                            class="col-xs-6 btn btn-primary  checkout-button wc-forward"
-                                                            name="proceed" value="Proceed to Checkout">
-                                                    </div> -->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" class="actions">
+                                                    <div class="col-xs-12">
+                                                        <hr>
+                                                    </div>
+                                                    <div class="cart-actions">
 
-                                                    <a href="http://helmuthhtml.local/checkout.php#"
-                                                        class="checkout-button">
-                                                       <button class="btn-group">Proceed to checkout</button> </a>
-                                                    <hr>
-                                                </div>
-                                                <div class="clearfix"></div> <input type="hidden" id=""
-                                                    name="" value="f9c9c30a9c"><input type="hidden"
-                                                    name="" value="/cart/">
-                                            </td>
-                                        </tr>
+                                                        <a href="http://helmuthhtml.local/checkout.php#" class="checkout-button">
+                                                            <button class="btn-group">Proceed to checkout</button> </a>
+                                                        <hr>
+                                                    </div>
+                                                    <div class="clearfix"></div> <input type="hidden" id="" name="" value="f9c9c30a9c"><input type="hidden" name="" value="/cart/">
+                                                </td>
+                                            </tr>
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
 
-                                <div class="clearfix"></div>
+                                    <div class="clearfix"></div>
 
-                                <div class="clearfix"></div>
-                            </form>
-
-                            <div class="clearfix"></div>
-
+                                    <div class="clearfix"></div>
+                                </form>
+                            <?php
+                            } else {
+                            ?>
+                            <div class="cart">
+                                    <div class="alert alert-warning alert-dismissable cart-empty">  Your cart is currently empty.</div>
+                                    <p class="return-to-shop">
+                                            <a class="btn btn-primary btn-block cart-backward" href="/furniture.php">Return To Shop</a>
+                                    </p>
+                            </div>
+                            <?php
+                            }
+                            ?>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -136,13 +131,12 @@ include("header.php")
 
             </main><!-- /.main -->
 
-
-
             <div class="clearfix"></div>
         </div>
     </div><!-- /.content -->
 </div>
 
+
 <?php
-include("footer.php")
+include("footer.php");
 ?>

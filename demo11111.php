@@ -142,3 +142,6 @@ include("../includes/db.inc.php");
 </body>
 
 </html>
+
+
+ <!-- <td class="col-sm-1 product-remove"> <a href="/cart.php/?remove_item=<?php echo ($_SESSION['cart'][$key]["product_name"]); ?>&&id=<?php echo ($_SESSION['cart'][$key]["product_id"]); ?>" class="btn btn-danger remove" title="Remove this item"><i class="fa fa-remove fa-2x   "></i></a> </td> -->
