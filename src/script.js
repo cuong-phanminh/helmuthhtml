@@ -111,7 +111,7 @@ function testChange(id) {
   const quantity = $(`#${id}`).val()
   $.ajax({
     type: "POST",
-    url: './addquantity.php',
+    url: './actionajax.php',
     data: `id=${id}&quantity=${quantity}`,
     success: function (data) {
       $("body").load("cart.php");
@@ -125,7 +125,7 @@ function testChange(id) {
 function remove_product_iterm(id) {
   $.ajax({
     type: "POST",
-    url: './addquantity.php',
+    url: './actionajax.php',
     data: `id=${id}&action=remove`,
     success: function (data) {
       console.log("functionremove_product_iterm -> data", data)
