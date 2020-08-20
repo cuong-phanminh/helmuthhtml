@@ -15,7 +15,7 @@ if (isset($_POST["addproductSubmit"])) {
     /*
      * Read posted values.
      */
-    
+
     // $productName = isset($_POST['name']) ? $_POST['name'] : '';
     // $productCategory = isset($_POST['categories']) ? $_POST['categories'] : '';
     // $productQuantity = isset($_POST['quantity']) ? $_POST['quantity'] : 0;
@@ -27,7 +27,8 @@ if (isset($_POST["addproductSubmit"])) {
     $productCategory = $_POST['child_category'];
     $productQuantity = $_POST['quantity'];
     $productDescription = $_POST['description'];
-    $productModelyear = $_POST['modelyear'];
+    $productModelyear = date("Y/m/d");
+    //$_POST['modelyear'];
     $productImage = $_POST['image'];
     $productPrice = $_POST['price'];
 
@@ -111,49 +112,49 @@ if (isset($_POST["addproductSubmit"])) {
      */
     if (!isset($errors)) {
 
-        
+
 
         $query = "INSERT INTO products (child_cate_id,product_name) 
   			  VALUES('$productCategory','$productName')";
-                mysqli_query($conn, $query);
-                // $_SESSION['success'] = "You are now added in";
+        mysqli_query($conn, $query);
+        // $_SESSION['success'] = "You are now added in";
 
 
         $query_img = "INSERT INTO images (img_url) 
                 VALUES('$productImage')";
-                mysqli_query($conn, $query_img);
-                // $_SESSION['success'] = "You are now added in";
+        mysqli_query($conn, $query_img);
+        // $_SESSION['success'] = "You are now added in";
 
-                if ($conn->query($query) === true) {
-                    $last_id = $conn->insert_id;
-                    
-                    $query_product_detailss = "INSERT INTO product_details (product_id,quantity,price,model_year,descriptions) 
+        if ($conn->query($query) === true) {
+            $last_id = $conn->insert_id;
+
+            $query_product_detailss = "INSERT INTO product_details (product_id,quantity,price,model_year,descriptions) 
                     VALUES('$last_id','$productQuantity','$productPrice','$productModelyear','$productDescription')";
-                    mysqli_query($conn, $query_product_detailss);
-                    // $_SESSION['success'] = "You are now added in";
-                }
-                if ($conn->query($query_product_detailss) === true) {
-                    $last_product_dt_id = $conn->insert_id;
-                    if ($conn->query($query_img) === true) {
-                        $last_img_id = $conn->insert_id;
-                        echo $last_product_dt_id;   
-                    
-                    $query_prooduct_image_relationship = "INSERT INTO prooduct_image_relationship (product_dt_id,img_id) 
+            mysqli_query($conn, $query_product_detailss);
+            // $_SESSION['success'] = "You are now added in";
+        }
+        if ($conn->query($query_product_detailss) === true) {
+            $last_product_dt_id = $conn->insert_id;
+            if ($conn->query($query_img) === true) {
+                $last_img_id = $conn->insert_id;
+                echo $last_product_dt_id;
+
+                $query_prooduct_image_relationship = "INSERT INTO prooduct_image_relationship (product_dt_id,img_id) 
                     VALUES('$last_product_dt_id','$last_img_id')";
-                    mysqli_query($conn, $query_prooduct_image_relationship);
-                    // $_SESSION['success'] = "You are now added in";
-                }
+                mysqli_query($conn, $query_prooduct_image_relationship);
+                // $_SESSION['success'] = "You are now added in";
             }
-            ?>
-            <script>
-            if ( window.history.replaceState ) {
-                window.history.replaceState( null, null, window.location.href );
-            }</script>
-           <?php
-            } else {
-                echo "Error: Add unsuccess " . $conn->error;
-                }
-              
+        }
+?>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
+<?php
+    } else {
+        echo "Error: Add unsuccess " . $conn->error;
+    }
 }
 ?>
 
@@ -165,8 +166,8 @@ if (isset($_POST["addproductSubmit"])) {
     <div id="content">
 
         <?php
-       include("includes/topbar.php")
-       ?>
+        include("includes/topbar.php")
+        ?>
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
@@ -189,64 +190,50 @@ if (isset($_POST["addproductSubmit"])) {
                                         </div>
                                         <form class="product" action="" method="POST">
                                             <?php
-                                        $query = " SELECT * FROM child_category";
-                                        $query_run = mysqli_query($conn, $query);
-                                        ?>
+                                            $query = " SELECT * FROM child_category";
+                                            $query_run = mysqli_query($conn, $query);
+                                            ?>
                                             <label for="child_category">Category</label>
                                             <select id="child_category" name="child_category">
                                                 <?php
-                                                if(mysqli_num_rows($query_run) > 0)        
-                                                {
-                                                    while($row = mysqli_fetch_assoc($query_run))
-                                                    {
-
-                                                    ?>
-
-                                                <option value="<?php echo $row['child_cate_id'];?>">
-                                                    <?php echo $row['child_cate_name']; ?>
-                                                </option>
+                                                if (mysqli_num_rows($query_run) > 0) {
+                                                    while ($row = mysqli_fetch_assoc($query_run)) {
+                                                ?>
+                                                        <option value="<?php echo $row['child_cate_id']; ?>">
+                                                            <?php echo $row['child_cate_name']; ?>
+                                                        </option>
                                                 <?php
-                                                } 
-                                            }
-                                            else {
-                                                echo "No Record Found";
-                                            }
-                                            ?>
+                                                    }
+                                                } else {
+                                                    echo "No Record Found";
+                                                }
+                                                ?>
                                             </select>
 
                                             <div class="form-group">
-                                                <input type="text" class="form-control form-control-product"
-                                                    name="productname" id="productname" placeholder="Product name">
+                                                <input type="text" class="form-control form-control-product" name="productname" id="productname" placeholder="Product name">
                                             </div>
                                             <div class="form-group">
-                                                <input type="number" class="form-control form-control-product"
-                                                    name="quantity" id="quantity" placeholder="Quantity">
+                                                <input type="number" class="form-control form-control-product" name="quantity" id="quantity" placeholder="Quantity">
                                             </div>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control form-control-product"
-                                                    name="price" id="price" placeholder="Price">
+                                                <input type="text" class="form-control form-control-product" name="price" id="price" placeholder="Price">
+                                            </div>
+                                            <!-- <div class="form-group ">
+                                                <input type="date" class="form-control form-control-product" name="modelyear" id="modelyear" placeholder="Model year">
+                                            </div> -->
+                                            <div class="form-group ">
+                                                <input type="file" class="form-control form-control-product" name="image" id="image" placeholder="Product Image">
                                             </div>
                                             <div class="form-group ">
-                                                <input type="date" class="form-control form-control-product"
-                                                    name="modelyear" id="modelyear" placeholder="Model year">
+                                                <input type="textarea" style="min-height: 50px;" class="form-control form-control-product" name="description" id="description" placeholder="Description">
                                             </div>
-                                            <div class="form-group ">
-                                                <input type="file" class="form-control form-control-product"
-                                                    name="image" id="image" placeholder="Product Image">
-                                            </div>
-                                            <div class="form-group ">
-                                                <input type="textarea" style="min-height: 50px;"
-                                                    class="form-control form-control-product" name="description"
-                                                    id="description" placeholder="Description">
-                                            </div>
-                                            <button type="submit" name="addproductSubmit"
-                                                class="btn btn-primary btn-user btn-block">Add Product</button>
+                                            <button type="submit" name="addproductSubmit" class="btn btn-primary btn-user btn-block">Add Product</button>
                                             <hr>
                                         </form>
                                         <hr>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"><a href="products.php"
-                                                    style="color:#fff">Close</a></button>
+                                            <button type="button" class="btn btn-secondary"><a href="products.php" style="color:#fff">Close</a></button>
                                             <!-- <button type="submit" class="btn btn-primary">Save</button> -->
 
                                         </div>
@@ -262,6 +249,6 @@ if (isset($_POST["addproductSubmit"])) {
 
 
                 <?php
-include("includes/script.php");
-include("includes/footer.php");
-?>
+                include("includes/script.php");
+                include("includes/footer.php");
+                ?>

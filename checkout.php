@@ -151,6 +151,10 @@ include("header.php");
                                             $query_run = mysqli_query($conn, $query);
                                             while ($row = mysqli_fetch_assoc($query_run)) {
                                                 $price = $row['price'];
+                                                $quantitypro = $row['quantity'];
+                                                //update quantity product
+                                                $query = "UPDATE product_details set quantity= $quantitypro - $quantity  where product_dt_id ='$product_dt_id'";
+                                                $query_run = mysqli_query($conn, $query);
                                             }
 
                                             $query_order_detail = "INSERT INTO order_detail (order_id ,product_id  ,price ,quantity ) 
@@ -196,6 +200,10 @@ include("header.php");
                                             $query_run = mysqli_query($conn, $query);
                                             while ($row = mysqli_fetch_assoc($query_run)) {
                                                 $price = $row['price'];
+                                                $quantitypro = $row['quantity'];
+                                                //update quantity product
+                                                $query = "UPDATE product_details set quantity= $quantitypro - $quantity  where product_dt_id ='$product_dt_id'";
+                                                $query_run = mysqli_query($conn, $query);
                                             }
 
                                             $query_order_detail = "INSERT INTO order_detail (order_id ,product_id  ,price ,quantity ) 
@@ -253,6 +261,10 @@ include("header.php");
                                             $query_run = mysqli_query($conn, $query);
                                             while ($row = mysqli_fetch_assoc($query_run)) {
                                                 $price = $row['price'];
+                                                $quantitypro = $row['quantity'];
+                                                //update quantity product
+                                                $query = "UPDATE product_details set quantity= $quantitypro - $quantity  where product_dt_id ='$product_dt_id'";
+                                                $query_run = mysqli_query($conn, $query);
                                             }
 
                                             $query_order_detail = "INSERT INTO order_detail (order_id ,product_id  ,price ,quantity ) 
@@ -301,6 +313,10 @@ include("header.php");
                                             $query_run = mysqli_query($conn, $query);
                                             while ($row = mysqli_fetch_assoc($query_run)) {
                                                 $price = $row['price'];
+                                                $quantitypro = $row['quantity'];
+                                                //update quantity product
+                                                $query = "UPDATE product_details set quantity= $quantitypro - $quantity  where product_dt_id ='$product_dt_id'";
+                                                $query_run = mysqli_query($conn, $query);
                                             }
 
                                             $query_order_detail = "INSERT INTO order_detail (order_id ,product_dt_id ,product_name ,price ,quantity ) 

@@ -103,7 +103,7 @@ $message = '
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <th scope="row" colspan="2" style="text-align:left;color:#6d6d6d;border:1px solid #e4e4e4;padding:12px">Total:</th>
-                                                                                    <td style="text-align:left;color:#6d6d6d;border:1px solid #e4e4e4;padding:12px"><span><span>$</span>'.$total.'</span></td>
+                                                                                    <td style="text-align:left;color:#6d6d6d;border:1px solid #e4e4e4;padding:12px"><span><span>$</span>'.$ordertotal.'</span></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <th scope="row" colspan="2" style="text-align:left;color:#6d6d6d;border:1px solid #e4e4e4;padding:12px">Note:</th>
@@ -172,7 +172,7 @@ $message = '
 </html>
 ';
 
-if (sendmail("$billing_email", "Hello from PHPMailer", "$message")) {
+if (sendmail("$billing_email", "Your Helmuth Builders order receipt from "."$order_date", "$message")) {
     include_once('thankspage.php');
     unset($_SESSION["cart"]);
     header("Refresh:60");
