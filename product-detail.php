@@ -62,7 +62,7 @@ $product_dt_id1 = $_GET['product_id'];
                                     <link itemprop="availability" href="#">
                                 </div>
 
-                                <form class="cart" action="#" method="post" enctype="multipart/form-data">
+                                <form class="cart" action="" method="post">
                                     <div class="quantity"><input type="number" step="1" min="1" name="quantity" value="1" title="Qty" class="form-control input-text qty text input-lg pull-left" size="4"></div>
                                     <button type="submit" name="add-to-cart" value="3932" class="single_add_to_cart_button button alt">Add to cart</button>
                                 </form>
@@ -110,32 +110,30 @@ $product_dt_id1 = $_GET['product_id'];
             <div class="product-listing-inner products">
                 <?php
                 $query = " SELECT 
-            product_dt_id,
-            product_name,
-            price,
-            img_url,
-            quantity 
-            FROM
-            child_category
-            INNER JOIN
-            productss USING (child_cate_id )
-            INNER JOIN
-            product_detailss USING (product_id )
-            INNER JOIN
-            prooduct_image_relationship USING (product_dt_id  )
-            INNER JOIN
-            images USING (img_id  ) where child_cate_name = '$child_cate_name'
-            ORDER BY 
+                product_id,
+                product_dt_id,
+                product_name,
+                price,
+                img_url,
+                quantity 
+                FROM
+                child_category
+                INNER JOIN
+                products USING (child_cate_id)
+                INNER JOIN
+                product_details USING (product_id)
+                INNER JOIN
+                prooduct_image_relationship USING (product_dt_id)
+                INNER JOIN
+                images USING (img_id) where child_cate_name = '$child_cate_name'
+                ORDER BY 
                 product_id";
                 $query_run = mysqli_query($conn, $query);
 
-                ?>
 
-                <?php
                 if (mysqli_num_rows($query_run) > 0) {
                     while ($row = mysqli_fetch_assoc($query_run)) {
                         if ($row['product_dt_id'] != $product_dt_id1) {
-
                 ?>
 
                             <div class="col-md-3 product-item  poly-furniture">
@@ -149,13 +147,13 @@ $product_dt_id1 = $_GET['product_id'];
 
                                     <div class="caption">
                                         <a href="#">
-                                            <p class="product-title">Swing Springs</p>
+                                            <p class="product-title"><?php echo $row['product_name']; ?></p>
                                         </a>
                                         <!-- <div class="product-subtitle"></div> -->
-                                        <span hidden="" class="plain-price">20</span>
+                                        <!-- <span hidden="" class="plain-price">20</span> -->
 
-                                        <span class="price"><span class="price-amount amount"><span class="price-currencySymbol">$</span>20</span></span>
-                                        <form action="" class="cart" method="post">
+                                        <span class="price"><span class="price-amount amount"><span class="price-currencySymbol">$</span><?php echo $row['price'];?></span></span>
+                                        <form action="/furniture-category.php?child_category=<?php echo $child_cate_name; ?>&&product_id=<?php echo $product_dt_id1; ?>&&product_id2=<?php echo $row['product_id'] ;?>" class="cart" method="post">
                                             <div class="quantity"><input type="number" step="1" min="0" name="quantity" value="1" title="Qty" class="form-control input-text qty text input-lg pull-left" size="4">
                                             </div><button type="submit" class="btn add-to-cart add_to_cart_button product_type_simple">Add
                                                 to cart</button>
@@ -179,7 +177,7 @@ $product_dt_id1 = $_GET['product_id'];
 </main>
 
 <?php
-if (isset($_POST["add-to-cart"])) {
+if (isset($_POST['add-to-cart'])) {
     $product_id = $_GET["product_id"];
     $query = "SELECT 
         product_dt_id,
@@ -239,9 +237,8 @@ if (isset($_POST["add-to-cart"])) {
             );
             $_SESSION["cart"][0] = $item_array;
         }
-         header("Refresh:0");
+        header("Refresh:0");
     }
-   
 }
 if (isset($_GET["action"])) {
     if ($_GET["action"] == "delete") {

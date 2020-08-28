@@ -45,39 +45,40 @@ $child_cate_name = $_GET['child_category'];
                     <div class="product-listing-inner products">
                         <?php
                         if (mysqli_num_rows($query_run) > 0) {
-
                             while ($row = mysqli_fetch_assoc($query_run)) {
+                                if ($row['quantity'] > 0) {
                         ?>
-                                <div class="product-item poly-furniture">
+                                    <div class="product-item poly-furniture">
 
-                                    <a href="#" class="product__link"></a>
-                                    <div class="product-item-inner">
-                                        <a href="#" class="product__link">
-                                        </a>
-                                        <a href="/product-detail.php?child_cate_name=<?php echo $child_cate_name; ?>&&product_id=<?php echo $row['product_dt_id']; ?>">
-                                            <img alt="Swing Chains" src="<?php echo "/src/images/" . $row['img_url']; ?>">
-                                        </a>
+                                        <a href="#" class="product__link"></a>
+                                        <div class="product-item-inner">
+                                            <a href="#" class="product__link">
+                                            </a>
+                                            <a href="/product-detail.php?child_cate_name=<?php echo $child_cate_name; ?>&&product_id=<?php echo $row['product_dt_id']; ?>">
+                                                <img alt="Swing Chains" src="<?php echo "/src/images/" . $row['img_url']; ?>">
+                                            </a>
 
-                                        <div class="caption">
-                                            <div class="product-title">
-                                                <a href="#">
-                                                    <p class="product-title"> <?php echo $row['product_name']; ?></p>
-                                                </a>
-                                            </div>
-                                            <div class="product-subtitle">
-                                                <div class="price">
-                                                    <span class="price-currencySymbol">$</span><?php echo $row['price']; ?></span></span>
+                                            <div class="caption">
+                                                <div class="product-title">
+                                                    <a href="#">
+                                                        <p class="product-title"> <?php echo $row['product_name']; ?></p>
+                                                    </a>
                                                 </div>
-                                                <form action="/furniture-category.php?child_category=<?php echo $child_cate_name; ?>&&product_id=<?php echo $row['product_dt_id']; ?>" class="cart" method="post" enctype="multipart/form-data">
-                                                    <input type="number" step="1" min="0" name="quantity" value="1" title="Qty" class="form-control input-text qty pull-left" size="4">
-                                                    <button type="submit" name="add-to-cart" class="btn add-to-cart ">Add to cart</button>
-                                                </form>
-                                            </div>
+                                                <div class="product-subtitle">
+                                                    <div class="price">
+                                                        <span class="price-currencySymbol">$</span><?php echo $row['price']; ?></span></span>
+                                                    </div>
+                                                    <form action="/furniture-category.php?child_category=<?php echo $child_cate_name; ?>&&product_id=<?php echo $row['product_dt_id']; ?>" class="cart" method="post" enctype="multipart/form-data">
+                                                        <input type="number" step="1" min="0" name="quantity" value="1" title="Qty" class="form-control input-text qty pull-left" size="4">
+                                                        <button type="submit" name="add-to-cart" class="btn add-to-cart ">Add to cart</button>
+                                                    </form>
+                                                </div>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                         <?php
+                                }
                             }
                         } else {
                             echo "No Record Found";
@@ -122,7 +123,7 @@ if (isset($_POST["add-to-cart"])) {
                 $item_array = array(
                     'product_id' => $_GET["product_id"],
                     'img_url' => $row['img_url'],
-                    'product_name' => $row['product_name'], 
+                    'product_name' => $row['product_name'],
                     'item_quantity' => $_POST["quantity"]
                 );
                 $_SESSION["cart"][$count] = $item_array;
@@ -137,13 +138,13 @@ if (isset($_POST["add-to-cart"])) {
                     $cnt++;
                 }
             }
-            ?>
-                <script>
-                    if ( window.history.replaceState ) {
-                        window.history.replaceState( null, null, window.location.href );
-                    }
-                </script>
-            <?php
+?>
+            <script>
+                if (window.history.replaceState) {
+                    window.history.replaceState(null, null, window.location.href);
+                }
+            </script>
+<?php
         } else {
             $item_array = array(
                 'product_id' => $_GET["product_id"],
@@ -159,7 +160,7 @@ if (isset($_POST["add-to-cart"])) {
 ?>
 
 
-<?php  
+<?php
 include("footer.php");
 ob_end_flush();
 ?>

@@ -86,7 +86,7 @@ width: 20%;
 } */
 
 .navbar-collapse  ul {
-    top: 37px;
+    margin-bottom: 0;
     list-style-type: none;
     text-align: center;
     overflow: hidden;
@@ -97,18 +97,18 @@ width: 20%;
 
 
 
-  /* .navbar-collapse li {
-    color: #f1f1f1;
-    display: inline-block;
-    width: 120px;
-    height: 40px;
-    line-height: 40px;
-    margin-left: -5px;
-  } */
+/* .navbar-collapse li {
+color: #f1f1f1;
+display: inline-block;
+width: 120px;
+height: 40px;
+line-height: 40px;
+margin-left: -5px;
+} */
 .navbar-collapse li {
 float: left;
 width: 120px;
-height: 40px;
+/* height: 40px; */
 line-height: 40px;
 }
 
@@ -131,9 +131,9 @@ line-height: 40px;
 }
 
 
-.navbar-collapse a:hover {
+.navbar-collapse ul li a:hover .navbar-collapse a:focus  {
 color: #720C0B;
-background: #F1F1F1;
+/* background: #F1F1F1; */
 }
 
 /* fix nav */
@@ -176,10 +176,13 @@ background: #F1F1F1;
     visibility: hidden;
     position: absolute;
     display: flex;
-    top: 50px;
+    /* top: 100%;    */
+    border: 5px solid #E6E6E6;
     transform: translateY(40px);
+    z-index: 9999999;
     transition: all 0.4s;
-    right: 0;
+    right: -5px;
+    
 }
 .navbar-collapse li.menu-item a.menu-item-link-products:hover + .dropdown-menu {
     visibility: visible;
@@ -206,11 +209,6 @@ background: #F1F1F1;
     transform: translateY(0);
     background-color: #E6E6E6;
 }
-
-
-
-
-
 
 
 .header-topbar .chanel-social {
@@ -283,7 +281,7 @@ li.shopping-cart > a > img{
 
 .content .section .section-inner .section-content .section-description #menu-dropdown-hero li a{
     color: #FFF;
-    background-color: black;
+    /* background-color: black; */
 }
 
 .description span{
@@ -532,6 +530,16 @@ li.shopping-cart > a > img{
     line-height: 28px;
     letter-spacing: 0.05em;
     color: #484848;
+}
+
+.content_blog {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;
+    max-height: 97px;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
 }
 
 .blog-info .blog-title a{

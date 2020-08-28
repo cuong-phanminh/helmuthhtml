@@ -51,7 +51,21 @@
       <div class="collapse-divider"></div>
       <h6 class="collapse-header">Other Pages:</h6>
       <a class="collapse-item" href="404.php">404 Page</a>
+      <a class="collapse-item" href="http://helmuthhtml.local">Home</a>
       <a class="collapse-item" href="products.php">Products</a>
+    </div>
+  </div>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+    <i class="fas fa-fw fa-folder"></i>
+    <span>Ports</span>
+  </a>
+  <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <a class="collapse-item" href="categories.php">Category</a>
+      <a class="collapse-item" href="blogs.php">Blog</a>
     </div>
   </div>
 </li>

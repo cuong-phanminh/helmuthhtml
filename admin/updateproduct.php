@@ -64,7 +64,7 @@ if (isset($_POST['edit_btn'])) {
                                         if (mysqli_num_rows($query_run) > 0) {
                                             while ($row = mysqli_fetch_assoc($query_run)) {
                                         ?>
-                                                <form action="actionupdateproduct.php?id=<?php echo $edit_id;?>" method="POST">
+                                                <form action="code.php?id=<?php echo $edit_id;?>" method="POST">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control form-control-product" name="update_productname" id="productname" value="<?php echo $row['product_name']; ?>" placeholder="Product name">
                                                     </div>
@@ -74,17 +74,13 @@ if (isset($_POST['edit_btn'])) {
                                                     <div class="form-group ">
                                                         <input type="text" class="form-control form-control-product" name="update_price" id="price" value="<?php echo $row['price']; ?>" placeholder="Price">
                                                     </div>
-                                                    <!-- <div class="form-group ">
-                                                        <input type="date" class="form-control form-control-product" name="update_modelyear" id="modelyear" value="<?php echo $row['model_year']; ?>" placeholder="Model year">
-                                                    </div> -->
                                                     <div class="form-group ">
                                                         <input type="file" class="form-control form-control-product" name="update_image" id="image" value="<?php echo $row['descriptions']; ?>" placeholder="Product Image">
                                                     </div>
                                                     <div class="form-group ">
                                                         <input type="textarea" style="min-height: 50px;" class="form-control form-control-product" name="update_description" id="description" value="<?php echo $row['descriptions']; ?>" placeholder="Description">
                                                     </div>
-                                                    <button type="submit" name="updateproductSubmit" class="btn btn-primary btn-user btn-block">Add Product</button>
-                                                    <hr>
+                                                    <button type="submit" name="updateproductSubmit" class="btn btn-primary btn-user btn-block">Update Product</button>
                                                 </form>
                                         <?php
                                             }
@@ -92,10 +88,8 @@ if (isset($_POST['edit_btn'])) {
                                             echo "No Record Found";
                                         }
                                         ?>
-                                        <hr>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"><a href="products.php" style="color:#fff">Close</a></button>
-                                            <!-- <button type="submit" class="btn btn-primary">Save</button> -->
 
                                         </div>
                                     </div>

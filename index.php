@@ -25,10 +25,7 @@ include("header.php")
         </div>
 
         <div class="section-slider">
-            <iframe title="Field for website" width="100%" height="100%"
-                src="https://www.youtube.com/embed/aKFRiMlkrd4?feature=oembed&amp;autoplay=1&amp;controls=0&amp;loop=1&amp;muted=1&amp;playlist=aKFRiMlkrd4"
-                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen="">
+            <iframe title="Field for website" width="100%" height="100%" src="https://www.youtube.com/embed/aKFRiMlkrd4?feature=oembed&amp;autoplay=1&amp;controls=0&amp;loop=1&amp;muted=1&amp;playlist=aKFRiMlkrd4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
             </iframe>
         </div>
 
@@ -38,30 +35,28 @@ include("header.php")
     <div class="hero-menu" style="padding: 0 8%; background: #720C0B;">
 
         <?php
-            $query = " SELECT * FROM parent_category";
-            $query_run = mysqli_query($conn, $query);
+        $query = " SELECT * FROM parent_category";
+        $query_run = mysqli_query($conn, $query);
         ?>
         <ul id="hero-menu-iterm" style="list-style: none; margin: 0; padding: 0; display: flex;">
             <?php
-                if(mysqli_num_rows($query_run) > 0){
-                    while($row = mysqli_fetch_assoc($query_run))
-                    {
-                ?>
+            if (mysqli_num_rows($query_run) > 0) {
+                while ($row = mysqli_fetch_assoc($query_run)) {
+            ?>
 
-            <li class="">
-                <a href="<?php  echo $row['parent_cate_name'].".php"; ?>">
-                    <img src="<?php  echo $row['url_img']; ?>" alt="sheds">
-                    <span><?php  echo $row['parent_cate_name']; ?></span>
-                </a>
-            </li>
+                    <li class="">
+                        <a href="<?php echo './' . $row['parent_cate_name'] . ".php"; ?>">
+                            <img src="<?php echo "/src/images/" .$row['url_img']; ?>" alt="sheds">
+                            <span><?php echo $row['parent_cate_name']; ?></span>
+                        </a>
+                    </li>
 
             <?php
-                    } 
                 }
-                else {
-                    echo "No Record Found";
-                }
-                ?>
+            } else {
+                echo "No Record Found";
+            }
+            ?>
 
         </ul>
     </div>
@@ -73,8 +68,7 @@ include("header.php")
             <div class="section-body">
                 <div class="grid-item-1">
                     <div class="wrap-item">
-                        <img class="grid-image"
-                            src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2019/04/RENT-TO-OWN.jpg">
+                        <img class="grid-image" src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2019/04/RENT-TO-OWN.jpg">
                         <div class="wrap-grid">
                             <h4 class="grid-title">RENT TO OWN</h4>
                             <div class="grid-description">
@@ -88,8 +82,7 @@ include("header.php")
                 </div>
                 <div class="grid-item-2">
                     <div class="wrap-item">
-                        <img class="grid-image"
-                            src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2019/04/FREE-DELIVERY.jpg">
+                        <img class="grid-image" src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2019/04/FREE-DELIVERY.jpg">
                         <div class="wrap-grid">
                             <h4 class="grid-title">FREE DELIVERY</h4>
                             <div class="grid-description">
@@ -103,8 +96,7 @@ include("header.php")
                 </div>
                 <div class="grid-item-3 col-md-4">
                     <div class="wrap-item">
-                        <img class="grid-image"
-                            src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2019/04/DESIGN-YOUR-OWN.jpg">
+                        <img class="grid-image" src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2019/04/DESIGN-YOUR-OWN.jpg">
                         <div class="wrap-grid">
                             <h4 class="grid-title">DESIGN YOUR OWN</h4>
                             <div class="grid-description">
@@ -129,28 +121,22 @@ include("header.php")
             <div class="section-body">
                 <div class="material-wrapper">
                     <div class="material-image">
-                        <img alt="Storage Building"
-                            src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2017/02/Materials-section-Windsor1.jpg">
+                        <img alt="Storage Building" src="https://daf9p2mnm4nrk.cloudfront.net/uploads/2017/02/Materials-section-Windsor1.jpg">
                         <ul class="material-wrapper nav nav-tabs" role="tablist">
                             <li id='siding' role="presentation" class="siding active">
-                                <a aria-controls="siding" class="tablinks"
-                                    onclick="openIngredient(this, 'siding1', 'siding2')">Siding</a>
+                                <a aria-controls="siding" class="tablinks" onclick="openIngredient(this, 'siding1', 'siding2')">Siding</a>
                             </li>
                             <li id='flooring' role="presentation" class="flooring">
-                                <a aria-controls="flooring" class="tablinks"
-                                    onclick="openIngredient(this, 'flooring1', 'flooring2')">Flooring</a>
+                                <a aria-controls="flooring" class="tablinks" onclick="openIngredient(this, 'flooring1', 'flooring2')">Flooring</a>
                             </li>
                             <li id='roof' role="presentation" class="roof">
-                                <a aria-controls="roof" class="tablinks"
-                                    onclick="openIngredient(this, 'roof1', 'roof2')">Roof</a>
+                                <a aria-controls="roof" class="tablinks" onclick="openIngredient(this, 'roof1', 'roof2')">Roof</a>
                             </li>
                             <li id='paint' role="presentation" class="paint">
-                                <a aria-controls="paint" class="tablinks"
-                                    onclick="openIngredient(this, 'paint1', 'paint2')">Paint</a>
+                                <a aria-controls="paint" class="tablinks" onclick="openIngredient(this, 'paint1', 'paint2')">Paint</a>
                             </li>
                             <li id='trim' role="presentation" class="trim">
-                                <a aria-controls="trim" class="tablinks"
-                                    onclick="openIngredient(this, 'trim1', 'trim2')">Trim</a>
+                                <a aria-controls="trim" class="tablinks" onclick="openIngredient(this, 'trim1', 'trim2')">Trim</a>
                             </li>
                         </ul>
                     </div>
@@ -167,25 +153,20 @@ include("header.php")
                         <!-- Nav tabs -->
                         <ul class="material-wrapper nav nav-tabs" role="tablist">
                             <li id='siding1' role="presentation" class="siding active">
-                                <a aria-controls="siding" role="tab" class="tablinks"
-                                    onclick="openIngredient(this, 'siding', 'siding2')">Siding</a>
+                                <a aria-controls="siding" role="tab" class="tablinks" onclick="openIngredient(this, 'siding', 'siding2')">Siding</a>
                             </li>
 
                             <li id='flooring1' role="presentation" class="flooring">
-                                <a aria-controls="flooring" role="tab" class="tablinks"
-                                    onclick="openIngredient(this, 'flooring', 'flooring2')">Flooring</a>
+                                <a aria-controls="flooring" role="tab" class="tablinks" onclick="openIngredient(this, 'flooring', 'flooring2')">Flooring</a>
                             </li>
                             <li id='roof1' role="presentation" class="roof">
-                                <a aria-controls="roof" role="tab" class="tablinks"
-                                    onclick="openIngredient(this, 'roof', 'roof2')">Roof</a>
+                                <a aria-controls="roof" role="tab" class="tablinks" onclick="openIngredient(this, 'roof', 'roof2')">Roof</a>
                             </li>
                             <li id='paint1' role="presentation" class="paint">
-                                <a aria-controls="paint" role="tab" class="tablinks"
-                                    onclick="openIngredient(this, 'paint', 'paint2')">Paint</a>
+                                <a aria-controls="paint" role="tab" class="tablinks" onclick="openIngredient(this, 'paint', 'paint2')">Paint</a>
                             </li>
                             <li id='trim1' role="presentation" class="trim">
-                                <a aria-controls="trim" role="tab" class="tablinks"
-                                    onclick="openIngredient(this, 'trim', 'trim2')">Trim</a>
+                                <a aria-controls="trim" role="tab" class="tablinks" onclick="openIngredient(this, 'trim', 'trim2')">Trim</a>
                             </li>
                         </ul>
 
@@ -333,29 +314,41 @@ include("header.php")
         </div>
 
         <div class="section-body">
-            <div class="wrap-blog-item">
-                <div class="blog-img">
-                    <a href="https://helmuthbuilders.com/blog/biggest-sale-of-the-year/">
-                        <img src="https://helmuthbuilders.com/wp-content/themes/shoestrap-3-woocommerce-child/assets/img/no-thumbnail.jpg"
-                            alt="Biggest sale of the year">
-                    </a>
-                </div>
+            <?php
+            $query = " SELECT
+            *
+            FROM
+            blogs
+            INNER JOIN
+            blog_detail USING (blog_id ) LIMIT 2 ";
+            $query_run = mysqli_query($conn, $query);
+            if (mysqli_num_rows($query_run) > 0) {
 
-                <div class="blog-info">
-                    <h5 class="meta">July 1, 2020</h5>
-                    <h3 class="blog-title"><a href="https://helmuthbuilders.com/blog/biggest-sale-of-the-year/">Biggest
-                            sale of the year</a></h3>
-                    <div class="des">
-                        <p>Check out the biggest sale of 2020. If you are looking to save big on a
-                            storage shed, gazebo, animal structure, or outdoor furniture you have picked
-                            the right month to purchase. Through the month of July you can choose … <a href="#">
-                                <b>Read more</b></a></p>
+                while ($row = mysqli_fetch_assoc($query_run)) {
+            ?>
+                    <div class="wrap-blog-item">
+                        <div class="blog-img">
+                            <a href="https://helmuthbuilders.com/blog/biggest-sale-of-the-year/">
+                                <img src="https://helmuthbuilders.com/wp-content/themes/shoestrap-3-woocommerce-child/assets/img/no-thumbnail.jpg" alt="Biggest sale of the year">
+                            </a>
+                        </div>
+
+                        <div class="blog-info">
+                            <h5 class="meta"><?php echo $row['publication_date'] ?></h5>
+                            <h3 class="blog-title"><a href="https://helmuthbuilders.com/blog/biggest-sale-of-the-year/"><?php echo $row['blog_name'] ?></a></h3>
+                            <div class="des">
+                                <p><?php echo $row['blog_content'] ?></p>
+                            </div>
+                            <a href="#">
+                                        <b>Read more</b></a>
+                        </div>
                     </div>
-                </div>
-            </div>
+            <?php
+                }
+            }
+            ?>
 
-
-            <div class="wrap-blog-item">
+            <!-- <div class="wrap-blog-item">
                 <div class="blog-img">
                     <a href="https://helmuthbuilders.com/blog/when-new-faces-become-familiar-faces/">
                         <img src="https://helmuthbuilders.com/wp-content/themes/shoestrap-3-woocommerce-child/assets/img/no-thumbnail.jpg"
@@ -375,7 +368,7 @@ include("header.php")
                                     more</b></a></p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 

@@ -24,12 +24,12 @@ include("security.php");
             <!-- Data table example  -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary"> Products
-                        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addproduct">
-                            Add Product
+                    <h6 class="m-0 font-weight-bold text-primary"> Category
+                        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addparentcategory">
+                            Add Parent Category
                         </button> -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addproduct">
-                            <a href="addproduct.php" style="color:#fff"> Add Product</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addparentcategory">
+                            <a href="addparentcategory.php" style="color:#fff"> Add Parent Category</a>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <!-- <span aria-hidden="true">&times;</span> -->
@@ -50,40 +50,20 @@ include("security.php");
                     <div class="table-responsive">
                         <?php
                         $query = " SELECT
-                        product_id,
-                        model_year,
-                        child_cate_id,
-                        product_dt_id,
-                        product_name,
-                        price,
-                        img_url,
-                        quantity,
-                        descriptions
+                        *
                         FROM
-                        child_category
-                        INNER JOIN
-                        products USING (child_cate_id )
-                        INNER JOIN
-                        product_details USING (product_id )
-                        INNER JOIN
-                        prooduct_image_relationship USING (product_dt_id  )
-                        INNER JOIN
-                        images USING (img_id  )";
+                        parent_category";
                         $query_run = mysqli_query($conn, $query);
 
                         ?>
                         <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>ID</th>
+                                    <th>No.</th>    
                                     <th>Categry ID</th>
-                                    <th>Name</th>
-                                    <th>Quality</th>
-                                    <th>Price</th>
-                                    <th>Model year</th>
-                                    <th>Image ID</th>
-                                    <th>Description</th>
+                                    <th>Category Name</th>
+                                    <th>Image</th>
+                                    <th>Slug</th>
 
                                 </tr>
                             </thead>
@@ -96,26 +76,21 @@ include("security.php");
                                 ?>
                                         <tr>
                                             <td><?php echo $stt; ?></td>
-                                            <td><?php echo $row['product_id']; ?></td>
-                                            <td><?php echo $row['child_cate_id']; ?></td>
-                                            <td><?php echo $row['product_name']; ?></td>
-                                            <td><?php echo $row['quantity']; ?></td>
-                                            <td><?php echo $row['price']; ?></td>
-                                            <td><?php echo $row['model_year']; ?></td>
-                                            <td><img src="<?php echo "/src/images/" . $row['img_url']; ?>" alt="image" style="width:100px"></td>
-                                            <td><?php echo $row['descriptions']; ?></td>
-
+                                            <td><?php echo $row['parent_cate_id']; ?></td>
+                                            <td><?php echo $row['parent_cate_name']; ?></td>
+                                            <td><img src="<?php echo "/src/images/" . $row['url_img']; ?>" alt="image" style="width:100px"></td>
+                                            <td><?php echo $row['slug_parent_cate']; ?></td>
                                             <td>
-                                                <form action="updateproduct.php" method="post">
-                                                    <input type="hidden" name="edit_id" value="<?php echo $row['product_id']; ?>">
-                                                    <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
+                                                <form action="updateparentcategory.php" method="post">
+                                                    <input type="hidden" name="edit_parent_cate_id" value="<?php echo $row['parent_cate_id']; ?>">
+                                                    <button type="submit" name="edit_parent_cate_btn" class="btn btn-success"> EDIT</button>
 
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="code.php" method="post" onSubmit="return confirm('Bạn muốn xóa sản phẩm này?')">
-                                                    <input type="hidden" name="delete_id" value="<?php echo $row['product_id']; ?>">
-                                                    <button type="submit" name="delete_btn" class="btn btn-danger">
+                                                <form action="code.php" method="post" onSubmit="return confirm('Bạn muốn xóa category này?')">
+                                                    <input type="hidden" name="delete_parent_cate_id" value="<?php echo $row['parent_cate_id']; ?>">
+                                                    <button type="submit" name="delete_parent_cate_btn" class="btn btn-danger">
                                                         DELETE</button>
                                                 </form>
                                             </td>
