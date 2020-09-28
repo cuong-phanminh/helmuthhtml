@@ -1,0 +1,1076 @@
+jQuery(document).ready(function($) {
+  function init() {
+    var vidDefer = document.getElementsByTagName('iframe');
+    for (var i=0; i<vidDefer.length; i++) {
+      if(vidDefer[i].getAttribute('data-src')) {
+        vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
+      } } }
+      window.onload = init;
+	  // One page scroll animation
+	  var headerHeight = $(".header-inner").outerHeight();
+      $('a[href*="#"]:not([href="#"]):not([role="tab"]):not([data-toggle="collapse"]):not([class="fancybox"]):not([no-scroll="true"])').click(function() { 
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        $(".nav-main.in").collapse("toggle", 1000);
+        $('body .navbar-toggle').addClass('collapsed');
+		var target = $(this.hash);
+		if(target.offset().top > 160){
+			headerHeight = $(".header-inner").outerHeight();
+		}
+        target = target.length ? target : $('[name="' + this.hash.slice(1) +'"]');
+        if (target.length) {
+
+          $('html,body').animate({
+            scrollTop: target.offset().top - headerHeight
+          }, 1000);
+          return false;
+        }
+      }
+    });
+    
+    // Form tracking
+    $('a[href^="mailto"]').click(function () { ga('send', 'event', 'send custom email', 'click'); });
+    $('a[href^="tel:"]').click(function () { ga('send','event','phone call','click'); });
+    if ($('div[id^="wpcf7-f628"]')[0]) {
+      document.querySelector( 'div[id^="wpcf7-f628"]' ).addEventListener( 'wpcf7mailsent', function( ) { ga('send', 'event', 'Request Building Info', 'submit'); }, false );
+    }
+    if ($('div[id^="wpcf7-f149"]')[0]) {
+      document.querySelector( 'div[id^="wpcf7-f149"]' ).addEventListener( 'wpcf7mailsent', function( ) { ga('send', 'event', 'Contact Form', 'submit'); }, false );
+    }
+    if ($('div[id^="wpcf7-f3168"]')[0]) {
+      document.querySelector( 'div[id^="wpcf7-f3168"]' ).addEventListener( 'wpcf7mailsent', function( ) { ga('send', 'event', 'Foundation Work', 'submit'); }, false );
+    }
+    if ($('div[id^="wpcf7-f1407"]')[0]) {
+      document.querySelector('div[id^="wpcf7-f1407"]' ).addEventListener( 'wpcf7mailsent', function( ) { ga('send', 'event', 'Move My Shed', 'submit'); }, false );
+    }
+    if ($('div[id^="wpcf7-f701"]')[0]) {
+      document.querySelector('div[id^="wpcf7-f701"]' ).addEventListener( 'wpcf7mailsent', function( ) { ga('send', 'event', 'Design a Shed', 'submit'); }, false );
+    }
+    if ($('#mc4wp-form-1')[0]) {
+      // Gets a reference to the form element, assuming
+      // it contains the id attribute "signup-form".
+      var form = document.getElementById('mc4wp-form-1');
+      
+      // Adds a listener for the "submit" event.
+      form.addEventListener('submit', function(event) {
+        // Prevents the browser from submitting the form
+        // and thus unloading the current page.
+        event.preventDefault();
+        
+        // Sends the event to Google Analytics and
+        // resubmits the form once the hit is done.
+        ga('send', 'event', 'Subscribe', 'submit', {
+          hitCallback: function() {
+            form.submit();
+          }
+        });
+      });
+    }
+    
+    // Begin script - Hide menu when click outsite navbar
+    window.addEventListener('click', function(e){   
+      if (document.getElementById('banner-header').contains(e.target)){
+        // Clicked in box
+      } else{
+        // Clicked outside the box
+        $(".nav-main.in").collapse("toggle", 1000);
+        $('body .navbar-toggle').addClass('collapsed');
+      }
+    });
+    
+    $(window).scroll(function(event){
+      $(".nav-main.in").collapse("toggle", 1000);
+      $('body .navbar-toggle').addClass('collapsed');
+      $("#menu-dropdown-hero").removeClass("selected");
+    });
+    // End script - Hide menu when click outsite navbar
+    
+    
+    // For menu navbar active
+    // if ($('body.home').length > 0) {
+    //   $('body .navbar-nav > li').removeClass('active');
+    //   $( "body .navbar-nav > li > a" ).each(function() {
+    //     val_href = $(this).attr('href');
+    //     val_href = val_href.replace('/','');
+    //     $(this).attr('href',val_href);
+    //   });
+    // }
+    
+    
+    // Fix bug #hashtag link on product category page
+    $(window).load(function() {
+        if ($('.page.products').length > 0) {
+            var url = window.location.href;
+            var hash = url.split('/').pop()
+            var target = $(hash);
+            
+            if(target.length > 0) {
+                target = target.length ? target : $("[name=" + this.hash.slice(1) +"]");
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top - $(".navbar-header").height()
+                    }, 1000);
+                    return false;
+                }
+            }
+        }
+    //   var url_string = window.location.href; //window.location.href
+    //   var url = new URL(url_string);
+
+        var category = getQueryString('category');
+        var material = getQueryString('material');
+        var location = getQueryString('location');
+        var filterClass = '';
+
+        if (category != null && category != 'undefined') { filterClass += '.'+category}
+        if (material != null) { filterClass += '.'+material}
+        if (location != null) { filterClass += '.'+location}
+        if (category != null || material != null || location != null) {
+            // console.log(filterClass);
+            $('.product-listing').isotope({ itemSelector : '.product-item', filter: filterClass });
+            $('select').find('option[data-filter-value=".'+category+'"]').attr('selected','selected');
+            $('select').find('option[data-filter-value=".'+material+'"]').attr('selected','selected');
+            $('select').find('option[data-filter-value=".'+location+'"]').attr('selected','selected');
+        }
+    });
+
+
+    /**
+     * Get Params from url 
+     */
+    function getQueryString() {
+        var key = false, res = {}, itm = null;
+        // get the query string without the ?
+        var qs = location.search.substring(1);
+        // check for the key as an argument
+        if (arguments.length > 0 && arguments[0].length > 1)
+          key = arguments[0];
+        // make a regex pattern to grab key/value
+        var pattern = /([^&=]+)=([^&]*)/g;
+        // loop the items in the query string, either
+        // find a match to the argument, or build an object
+        // with key/value pairs
+        while (itm = pattern.exec(qs)) {
+          if (key !== false && decodeURIComponent(itm[1]) === key)
+            return decodeURIComponent(itm[2]);
+          else if (key === false)
+            res[decodeURIComponent(itm[1])] = decodeURIComponent(itm[2]);
+        }
+
+        return key === false ? res : null;
+    }
+
+    
+    if (!readCookie('hasLaunch')) {
+      //launch it
+      // popup 
+      var i = 0;
+      $(document).on('mousewheel', function(e) {
+        if (i==0) {
+          $(".home .popmake ").addClass('active');
+          // $(".home ._show_popup").trigger('click');
+          i++
+        }
+      });
+      $(document).on('DOMMouseScroll', function(e) {
+        if (i==0) {
+          $(".home .popmake ").addClass('active');
+          // $(".home ._show_popup").trigger('click');
+          i++
+        }
+      });
+      $(document).on('touchmove', function() { //touchmove works for iOS, I don't know if Android supports it
+      if (i==0) {
+        $(".home .popmake").addClass('active');
+        // $(".home ._show_popup").trigger('click');
+        i++
+      }
+    });
+    $(document).on('click','.popmake-close',function(e){
+      e.preventDefault();
+      $(".home .popmake").removeClass('active');
+    })
+    $(".home ._show_popup").on('click',function(e){
+      e.preventDefault();
+    })
+    
+    
+    //Then set the cookie, so next time the popup won't be displaying again. | Time expires is 10 days
+    createCookie('hasLaunch', 1, 10);
+  }
+  
+  
+  function createCookie(name,value,days) {
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime()+(days*24*60*60*1000));
+      var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+  }
+  
+  function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+  
+  function eraseCookie(name) {
+    createCookie(name,"",-1);
+  }
+  // eraseCookie('hasLaunch');
+  
+  
+  // Prevent multiple click on contact form 7
+  $('form.wpcf7-form').submit(function () { 
+    var btn = $('.wpcf7-submit').addClass("disabled"); // ref to #btn
+    setTimeout(function() {
+      $(btn).removeClass('disabled');
+    }
+    , 6000);
+  });
+  
+  // Go to #hashtag link on homepage
+  // $(window).load(function() {
+  //   if ($('.home').length > 0) {
+  //     var url = window.location.href;
+  //     var hash = url.split('/').pop()
+  //     var target = $(hash);
+  //     if(target.length > 0) {
+  //       target = target.length ? target : $("[name=" + this.hash.slice(1) +"]");
+  //       if (target.length) {
+  //         $('html,body').animate({
+  //         scrollTop: target.offset().top - $(".navbar-header").height()
+  //         }, 1000);
+  //         return false;
+  //       }
+  //     }
+  //   }
+  // });
+  
+  // $("body").scrollspy({
+  //   target: ".nav-main",
+  //   offset: 160
+  // });
+  
+  // update browser address bar URL
+  var currentHash = "#initial_hash"
+  $(document).scroll(function () {
+    // $('.page.products .category-item').each(function () {
+    //   var top = window.pageYOffset;
+    //   var distance = top - $(this).offset().top;
+    //   var hash = $(this).attr('id');
+      
+    //   // 30 is an arbitrary padding choice, 
+    //   // if you want a precise check then use distance===0
+    //   if (distance < 10 && distance > -10 && currentHash != hash) {
+    //     window.location.hash = (hash);
+    //     currentHash = hash;
+    //   }
+    // });
+  });
+  
+  // Update URL when click to product items
+  $(".products .category-title a").on("click", function() {
+    var hash_link = $(this).attr('href');  
+    setTimeout(function() {
+      window.location.hash = (hash_link);  
+      console.log(hash_link);
+    }, 1000);
+  });
+  
+  // $(window).scroll(function(event){
+  //   // Hide Build Your Own Button
+  //   $('#banner-header .nav > li.popup-button').slideUp('slow');
+  // });
+  
+  
+  // $('#banner-header .nav > li.popup-button span').click(function() {
+  //   $('#banner-header .nav > li.popup-button').slideUp('slow');
+  // });
+  
+  
+  
+  // Slider
+  
+  $('.bxslider.with-dots').bxSlider({
+    auto: true,
+    pager: true,
+    useCSS: false,
+    pause: 6000,
+    infiniteLoop: true,
+    touchEnabled: false,
+    adaptiveHeight:true,
+    controls: false,
+    mode: 'fade'
+  });
+
+  $('.bxslider').bxSlider({
+    auto: true,
+    pager: false,
+    useCSS: false,
+    pause: 6000,
+    infiniteLoop: true,
+    touchEnabled: false,
+    adaptiveHeight:true,
+    controls: true,
+    mode: 'fade'
+  });
+  
+  $('.category-sub-slider-gal').bxSlider({
+    auto: true,
+    pager: true,
+    useCSS: false,
+    pause: 4000,
+    infiniteLoop: true,
+    touchEnabled: false,
+  });
+  
+  $('.category-parent-slider-gal').bxSlider({
+    auto: true,
+    pager: true,
+    useCSS: false,
+    pause: 4000,
+    infiniteLoop: true,
+    touchEnabled: false,
+  });
+  
+  $('.category-sub-slider').bxSlider({
+    auto: false,
+    pager: true,
+    useCSS: false,
+    pause: 2000,
+    infiniteLoop: true,
+    touchEnabled: false,
+    hideControlOnEnd: true,
+  });
+  
+  $('.product-detail-images-slider').bxSlider({
+    auto: true,
+    pager: true,
+    useCSS: false,
+    pause: 4000,
+    infiniteLoop: true,
+    touchEnabled: false,
+    hideControlOnEnd: true,
+  });
+  
+  
+  // Scroll to next section when click
+  $(".section-nav").click(function() {
+    var sectionBottom = $(this).parent().position().top+$(this).parent().outerHeight(true);
+    $('html,body').animate({
+      scrollTop: sectionBottom
+    }, 1000);
+    return false;
+  });
+  
+  
+  // $('.news-items').each(function() {
+  //   var maxHeight = 0;
+  //   $('.news-items-title', this).each(function() {
+  //       if($(this).height() > maxHeight) {
+  //        maxHeight = $(this).height();  
+  //       }
+  //   });
+  
+  //   $('.news-items-title').height(maxHeight);
+  // });
+  
+  
+  $("#menu-dropdown-hero").on("click", function(e) {
+    if (!$(this).hasClass('selected')) {
+      $(this).addClass('selected');
+    } else {
+      $(this).removeClass('selected');
+    }
+    e.stopPropagation()
+  });
+  $(document).on("click", function(e) {
+    if ($(e.target).is("#menu-dropdown-hero") === false) {
+      $("#menu-dropdown-hero").removeClass("selected");
+    }
+  });
+  
+  
+  // Remove href link to detail product
+  if($('body.woocommerce-order-received').length > 0) {
+    $('body.woocommerce-order-received .shop_table .product-name a').attr('href','javascript:void(0)');
+  }
+  
+  // Filter bar search for Inventory page
+  //if ( $('body.inventory').length > 0 ) {
+  var $container = $('.isotope'),
+  filters = {};
+  
+  $(window).on("load", function() {
+    $container.isotope({
+      itemSelector : '.product-item',
+      masonry: {
+        gutter: 0
+      }
+    });
+  });
+  
+  
+  // filter buttons
+  $('select.option-set').change(function(){
+    
+    // Change URL when select taxonomy
+    var customURL = '?category=' + $('.product-category-select').find(':selected').attr('data-slug');
+    if ($('.material-select').find(':selected').attr('data-slug')) {
+      customURL += '&material=' + $('.material-select').find(':selected').attr('data-slug');
+    }
+    if ($('.location-select').find(':selected').attr('data-slug')) {
+      customURL += '&location=' + $('.location-select').find(':selected').attr('data-slug');
+    }
+    // console.log(customURL);
+    window.history.pushState("data","", customURL);
+    var $this = $(this);
+    // End - Change URL when select taxonomy
+    
+    // store filter value in object
+    // i.e. filters.color = 'red'
+    var group = $this.attr('data-filter-group');
+    
+    // get slug option - hide show subcategory
+    var slug = '.'+$this.find(':selected').attr('data-slug');
+    
+    filters[ group ] = $this.find(':selected').attr('data-filter-value');
+    // console.log( $this.find(':selected') )
+    // convert object into array
+    var isoFilters = [];
+    for ( var prop in filters ) {
+      isoFilters.push( filters[ prop ] )
+    }
+    var selector = isoFilters.join('');
+    
+    // Script for change subcategory on subcategory select filterbar
+    if(group == 'category') {
+      // $('select.subcategory-select optgroup').hide();
+      // $('select.subcategory-select '+slug).show();
+      // $("select.subcategory-select option:nth(0)").attr('selected','selected');
+      
+      if(slug != '.undefined') {
+        selector = slug; // filter all products in the category selected
+        $('select.subcategory-select').hide();
+        $('select.subcategory-select'+slug).show();
+      } else {
+        selector = ''; // filter all porducts
+      }
+    }
+    
+    // var url_string = window.location.href; //window.location.href
+    // var url = new URL(url_string);
+    // var category = url.searchParams.get("category");
+    // var material = url.searchParams.get("material");
+    // var location = url.searchParams.get("location");
+    var category = getQueryString('category');
+    var material = getQueryString('material');
+    var location = getQueryString('location');
+    var filterClass = '';
+    if (category != null && category != 'undefined') { filterClass += '.'+category}
+    if (material != null) { filterClass += '.'+material}
+    if (location != null) { filterClass += '.'+location}  
+    $container.isotope({ filter: filterClass });
+    if ( !$container.data('isotope').filteredItems.length ) {
+      $('.no-result').show();
+      $('body .main .product-listing').addClass('noresult');
+    }else{
+      $('.no-result').hide();
+      $('body .main .product-listing').removeClass('noresult');
+    }
+    // countItems();
+    return false;
+  });
+
+// setTimeout(countItems,500);    
+// // Function count items - Show No Results if count = 0
+// function countItems(){
+//   console.log('abcde');
+//   var count_items = $('.product-item:visible').length;
+//   if (count_items < 1 ) {
+//     $('.no-result').show();
+//     $('body .main .product-listing').addClass('noresult');
+//   } else {
+//     $('.no-result').hide();
+//     $('body .main .product-listing').removeClass('noresult');
+//   }
+// }
+
+  //}
+  // End filter bar search for Inventory page
+  
+  // Ajax load more post in Blog page
+  // if ($('body.archive.woocommerce-page').length > 0) {
+  // $('.product-listing-inner').infinitescroll({
+  //    animate      : true,  
+  //    navSelector  : ".pagination",
+  //    nextSelector : ".pagination a.next",
+  //    itemSelector : ".product-item",
+  //    loading      : {
+  //      speed: 'fast',
+  //      msgText  : "",
+  //      finishedMsg  : "",
+  //      img: "/wp-content/themes/shoestrap-3-woocommerce-child/assets/img/loading.gif",
+  //    },
+  // });
+  // }
+  
+  // Script for product page
+  if ($('body.single-inventory').length > 0) {
+    var product_title = $('.page-title').text();
+    var product_url = window.location.href;     // Returns full URL
+    $('input.product-title').val(product_title);
+    $('input.product-link').val(product_url);
+  }
+  
+  // Script for Materials
+  $('.material-content .nav-tabs li').each(function() {
+    $(this).click(function() {
+      var $class = $(this).attr('class');
+      var $class = '.' + $class;
+      console.log($class);
+      $('body .nav-tabs > li').removeClass('active');
+      $('.material-image .material-wrapper').find($class).addClass('active');
+    });
+  });
+  
+  $('.material-image .nav-tabs li').each(function() {
+    $(this).click(function() {
+      var $class = $(this).attr('class');
+      var $class = '.' + $class;
+      //console.log($class);
+      $('body .nav-tabs > li').removeClass('active');
+      $('.material-content .material-wrapper').find($class).addClass('active');
+      $('.material-tab.tab-content').find($class).addClass('active');
+    });
+  });
+  
+  
+  var $shed_type = 'shed-type-' + $('.content-form .shed-type').text();
+  var $siding_color = $('.content-form .siding-color').text();
+  var $roof_color = $('.content-form .roof-color').text();
+  var $shutters_color = $('.content-form .shutter-color').text();
+  var $trim_color = $('.content-form .trim-color').text();
+  
+  // Default shed type title
+  $shed_type_title = $("select.shed-type-title option:checked").text(); // Get Default shed type title
+  $('input.shed-type').val($shed_type_title);
+  
+  $("select.shed-type-title").change(function() {
+    // Reset value for input date
+    $('.content-form p').empty();
+    
+    // Set default for main image -remove all layers - remove selected class
+    $('.preview-option').css('background-image', "none");
+    $('.shed-builder-wrap .storage_contents .color').removeClass('selected');
+    
+    $shed_type_title = $("select.shed-type-title option:checked").text(); // Get title from Shed Type select
+    $shed_type_title_slug = $("select.shed-type-title option:checked").val(); // Get slug from Shed Type select
+    
+    $image_shed_types_url = $("select.shed-type-title option:checked").attr('image-shed-types-url');
+    // change title on form booking
+    $('.content-form .shed-type').text($shed_type_title);
+    $('input.shed-type').val($shed_type_title);
+    // change image for bilder
+    $('img.shed-builder-image').attr('src',$image_shed_types_url);
+    
+    $('.shed_type_option_group, #list-options-sizes .list-size').css('display', "none");
+    $('.shed_type_option_group.'+$shed_type_title_slug+', #list-options-sizes .list-size.'+$shed_type_title_slug).css('display', "block");
+  });
+  
+  function toLocalUrl($url) {
+    $searchVal = "https://" + wpbucket.s3bucket + ".s3.amazonaws.com"; 
+    $newVal = wpbucket.wp_content ;
+    return $url.replace($searchVal,$newVal);
+  }
+  
+  // Shed Builder function
+  $('.storage_contents .color').each(function() {
+    $(this).click(function() {
+      
+      $url_image_item = $(this).attr('data-preview-image');
+      $url_class = $(this).attr('data-class');
+      $url_class = '.' + $url_class;
+      // Add title in form booking
+      $title_item = $(this).find('.color-title').text();
+      
+      if (!$(this).hasClass('selected')) {
+        
+        $('.storage_contents'+$url_class+' .color').removeClass('selected');
+        $(this).addClass('selected');
+        
+        var url_append = $(this).attr('data-preview-image');
+        // url_append = toLocalUrl(url_append);
+        console.log($url_class);
+        $('.shed-builder-wrap .image-preview').find($url_class).css('background-image', "url("+ url_append +")");
+        $('.content-form ' + $url_class).text($title_item);
+        $('input' + $url_class).val($title_item);
+        
+        // Set name for image download when click choose title
+        if( $('.content-form .siding-color').text().length > 0 ) {
+          $siding_color = '';
+          $siding_color = '_siding-color-' + $('.content-form .siding-color').text();
+        }
+        if( $('.content-form .roof-color').text().length > 0 ) {
+          $roof_color = '';
+          $roof_color = '_roof-color-' + $('.content-form .roof-color').text();
+        }
+        if( $('.content-form .shutter-color').text().length > 0 ) {
+          
+          $shutters_color = '';
+          $shutters_color = '_shutter-color-' + $('.content-form .shutter-color').text();
+        }
+        if( $('.content-form .trim-color').text().length > 0 ) {
+          $trim_color = '';
+          $trim_color = '_trim-color-' + $('.content-form .trim-color').text();
+        }
+        
+      } else {
+        $(this).removeClass('selected');
+        $('.shed-builder-wrap .image-preview').find($url_class).css('background-image', "none");
+        $('.content-form ' + $url_class).empty();
+        $('input' + $url_class).removeAttr('value');
+        
+        // Remove name for image download when click remove title
+        $siding_color = $('.content-form .siding-color').text();
+        $roof_color = $('.content-form .roof-color').text();
+        $shutters_color = $('.content-form .shutter-color').text();
+        $trim_color = $('.content-form .trim-color').text();
+      }
+      
+    });
+  });
+  
+  /*contact form */
+  $('.contact-homepage').click(function(e){
+    var location = $('select[name="contactTo"]').val();
+    if(location == ''){
+      $('.wpcf7-response-output').html('Please choice location field.');
+      $('.wpcf7-response-output').addClass('wpcf7-validation-errors');
+      e.preventDefault() ;
+      return false;
+    }
+  })
+  $('.send-mail-helmuth').click(function(e){
+    // $url = toLocalUrl($('.shed-builder-image').attr('src'));
+    // $url = ($('.shed-builder-image').attr('src'));
+    // $('.shed-builder-image').attr('src',$url);
+    $("#btn-Convert-Html2Image").trigger('click');
+    $(this).addClass('disabled ');
+    $('.loading-save-img').show();
+    // setTimeout(function(){ 
+    //   // alert($('.image-shedbuilder').val());
+    //   // $('.send-mail-helmuth-mail').trigger('click');
+    // }
+    // , 6000);
+    
+  });
+  
+  
+  
+  // Click to donwload image shed builder
+  var element = $("#html-content-holder .wrap"); // global variable
+  var getCanvas; // global variable
+  $("#btn-Convert-Html2Image").click(function () {
+    
+    // Set name title for image download
+    // $shed_type = 'shed-type-' + $('.content-form .shed-type').text()+$siding_color+$roof_color+$shutters_color+$trim_color;
+    // html2canvas(document.querySelector("#html-content-holder"),{
+    //     allowTaint: false,
+    //     useCORS:true,
+    //   }).then(canvas => {
+    //     var img_data = canvas.toDataURL('image/jpeg');
+    //     $('.wpcf7-form input.image-shedbuilder').val(img_data);
+    //     // if(canvas){
+    //        $.ajax({
+    //             url: wc_add_to_cart_params.ajax_url,
+    //             method: 'post',
+    //             data: { 
+    //                 'action': 'save_image_to_server',
+    //                 'image_data': img_data,
+    //             },
+    //             success: function (data) {
+    //               $('.wpcf7-form input.image-shedbuilder').val(data);
+    //       $('.loading-save-img').hide();
+    //           }
+    
+    //         })
+    //     // }
+    //      // $("#img-out").append(canvas);
+    //     // document.body.appendChild(canvas)
+    // });
+    html2canvas(element, {
+      useCORS: true,
+      allowTaint : true,
+      onrendered: function (canvas) {
+        var img;
+        $.when(img = canvas.toDataURL('image/jpeg')).promise().done(function(){
+          // var url = img.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+          // $("#shed-download-img").attr('src',img);
+          // $("#shed-download-link").attr('href',img);
+          // $("#shed-download-link").attr('download',$shed_type+'.jpg');
+          // $("#shed-download-link")[0].click();
+          if (img) {
+            $.ajax({
+              url: wc_add_to_cart_params.ajax_url,
+              method: 'post',
+              data: {
+                'action': 'save_image_to_server',
+                'image_data': img,
+              },
+              success: function (data) {
+                $('.wpcf7-form input.image-shedbuilder').val(data);
+                $('.loading-save-img').hide();
+                $('.send-mail-helmuth-mail').trigger('click');
+                $('.send-mail-helmuth').removeClass('disabled');
+                // alert('complete');
+                console.log(img);
+
+              }
+
+            })
+          }
+        });
+        // Save image to server
+       
+        
+      }
+    });
+    
+    
+  });
+  
+  
+  // Convert img to svg
+  $('img.svg').each(function(){
+    var $img = $(this);
+    var imgID = $img.attr('id');
+    var imgClass = $img.attr('class');
+    var imgURL = $img.attr('src');
+    $.get(imgURL, function(data) {
+      // Get the SVG tag, ignore the rest
+      var $svg = $(data).find('svg');
+      // Add replaced image's ID to the new SVG
+      if(typeof imgID !== 'undefined') {
+        $svg = $svg.attr('id', imgID);
+      }
+      // Add replaced image's classes to the new SVG
+      if(typeof imgClass !== 'undefined') {
+        $svg = $svg.attr('class', imgClass+' replaced-svg');
+      }
+      // Remove any invalid XML tags as per http://validator.w3.org
+      $svg = $svg.removeAttr('xmlns:a');
+      // Check if the viewport is set, if the viewport is not set the SVG wont't scale.
+      if(!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+        $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'))
+      }
+      // Replace image with new SVG
+      $img.replaceWith($svg);
+    }, 'xml');
+  });
+  
+  
+  // Script for woocommerce - Ajax booking
+  // jQuery('.seadev-add-to-cart').click(function(){
+  //   var parent = jQuery(this).parent();
+  //   $('body').addClass('ajax-load');
+  //   // console.log(jQuery(this).parent());
+  //   var product_id = jQuery(this).data('product_id');
+  //   var quantity = jQuery(this).prev().children().val();
+  //   var product_title = jQuery(this).data('product_title');
+  
+  //    $.ajax({
+  //       url: wc_add_to_cart_params.ajax_url,
+  //       method: 'post',
+  //       dataType: 'json',
+  //       data: { 
+  //           'action': 'seadev_add_to_cart',
+  //           'product_id': product_id,
+  //           'quantity': quantity,
+  //           'product_title': product_title,
+  //       }
+  //   }).done( function (response) {
+  
+  //         if( response.status ){
+  //           //Update cart on navbar
+  //           jQuery('.shopping-cart').html(response.data);
+  
+  //          $('body').removeClass('ajax-load');
+  //          $('body .alert-woocommerce').fadeIn(500).append('<p class="seadev-alert seadev-alert'+product_id+'"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button> <strong> '+product_title+' </strong> has been added to your cart. <a class="view-cart" href="/cart/">View Cart</a></p>').delay(3000).fadeOut(500);
+  
+  //          // setTimeout for alert
+  //          setTimeout(function(){
+  //             jQuery('.seadev-alert'+product_id).remove();
+  //          }, 4000);
+  
+  //         } else {
+  //           alert('Add to cart error.');
+  //         }
+  //   });
+  
+  // })
+  // End script for woocommerce - Ajax booking
+  
+  $( document ).on( 'change', 'input.qty', function() {
+    $(".page.cart .actions .btn-group > .btn:first-child").trigger('click');
+  });
+  
+  
+  
+  // Get Distance from 2 locations/address
+  // var directionsDisplay;
+  // var directionsService = new google.maps.DirectionsService();
+  
+  // function initialize() {
+  //   directionsDisplay = new google.maps.DirectionsRenderer();
+  // }
+  
+  // initialize();
+  
+  // function calcRoute() {
+  //   var start = document.getElementById("start").value;
+  //   var end = document.getElementById("end").value;
+  
+  //   var request = {
+  //     origin:start, 
+  //     destination:end,
+  //     travelMode: google.maps.DirectionsTravelMode.DRIVING
+  //   };
+  
+  //   directionsService.route(request, function(response, status) {
+  //     if (status == google.maps.DirectionsStatus.OK) {
+  //       directionsDisplay.setDirections(response);
+  //       var route = response.routes[0].legs[0].distance.value * 0.000621371;
+  //       $('#distance').val(route);
+  //     }
+  //   });
+  
+  // }
+  // // Create click function for button submit  
+  // $('input[name=destination-address]').change(function() {
+  //   calcRoute();
+  // });
+  
+  // $('input[name=current-address]').change(function() {
+  //   calcRoute();
+  // });
+  
+  // $('#cal-route').click(function() {
+  //   calcRoute();
+  // });
+  
+  
+  
+  // $('.btn_dictance').on("click", function(e){
+  //     event.preventDefault();
+  //     var origin = $('#origin').val();
+  //     var destination = $('#destination').val();
+  //     var distance_text = calculateDistance(origin, destination);
+  // });
+  
+  
+  // Create click function for button submit  
+  // $('input[name=current-address]').change(function() {
+  //   var start = document.getElementById("start").value;
+  //   var end = document.getElementById("end").value;
+  //   calcRoute();
+  // });
+  
+  // Ajax count distance between from two address
+  $('input[name=destination-address], input[name=current-address]').change(function() {
+    // calcRoute();
+    var start = document.getElementById("start").value;
+    var end = document.getElementById("end").value;
+    $('input[type=submit]').addClass('disabled');
+    $.ajax({
+      url: wc_add_to_cart_params.ajax_url,
+      method: 'post',
+      dataType: "json",
+      data: { 
+        'action': 'seadev_distance',
+        'start': start,
+        'end': end,
+      }
+    }).done( function (data) {
+      //console.log(data.result);
+      $('input[type=submit]').removeClass('disabled');
+      jQuery('#distance').attr('value',data.result);
+      
+    });  
+    
+  });
+  
+  var wpcf7Elm = document.querySelector( '.wpcf7' ); 
+  wpcf7Elm.addEventListener( 'wpcf7submit', function( event ) {
+    console.log(event);
+    if(event.detail.contactFormId == 4648){
+      if(!$('#term:checkbox:checked').length > 0){
+        $(".custom-checkbox").addClass('error');
+        $(".custom-checkbox").prepend('<span role="alert" class="wpcf7-not-valid-tip">The field is required.</span>');
+      }
+    }      
+  }, false );
+
+});
+
+$ = jQuery;
+
+//Popup
+var widthData = $(window).height();
+$(window).resize(function(){
+    var widthData = $(window).height();
+    $('.popup').css('top', widthData/2-200+'px');
+})
+$('.popup-trigger').click(function(e) {
+    e.stopPropagation();
+    callPopup();
+    
+});
+
+function callPopup() {
+    var data = $('#ue-data-help').html();
+    $('.poup-body').remove();
+    $('html').append('<div class="poup-body"></div>');
+    $('body').append(
+        "<div class='popup' tabindex='-1'>"+
+        "<div class='inline-popup'>"+data+
+        "<a class='ue-btn-start popup-btn-close' href='javascript:void(0);'>Start</a></div>"+
+        "</div>"
+    );
+    $('.popup').css('display','block');
+    if(widthData/2 < 200){
+        $('.popup').css('top', 200 - widthData/2+'px');
+    }else {
+        $('.popup').css('top', widthData/2-200+'px');
+    }
+    
+}
+
+$('html').on('click',function(e) {
+    var popup = $(".popup");
+    
+    if (!$('.popup-btn-close').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {
+        $('.poup-body').remove();
+        $('.popup').remove();
+    }
+    if($('.popup-btn-close').is(e.target)){
+        $('.poup-body').remove();
+        $('.popup').remove();
+    }
+    
+});
+
+
+$(document).ready(function(e){
+    if($(".page-template-template-floorplan").length){
+        if (Cookies.get('popup_data') != '1') {
+            setTimeout(function(){
+                callPopup();
+            }, 3000);
+            
+            Cookies.set('popup_data', '1', { expires: 60}); 
+        }
+    }
+}); 
+
+
+/**
+ * Fixed menu
+ */
+jQuery(document).ready(function($) {
+
+    /**
+    * addClassHeroMenu when scroll
+    */
+    function addClassHeroMenu() {
+        var banner_header = $("#banner-header").innerHeight();
+        var hero_menu_height = $(".hero-menu").innerHeight() - banner_header;
+
+        var hero_slider = $(".home .hero.section-background-slider .section-slider");
+        var header_product = $(".archive.tax-inventory_category .header-product-wrap");
+
+        var hero_slider_bottom = (hero_slider.length > 0) ? hero_slider.offset().top + hero_slider.outerHeight(true) + hero_menu_height : "";
+        var header_product_bottom = (header_product.length > 0) ? header_product.offset().top + header_product.outerHeight(true) + hero_menu_height : "";
+
+        if ( (hero_slider_bottom !="" && window.pageYOffset >= hero_slider_bottom) || (header_product_bottom !="" && window.pageYOffset >= header_product_bottom)) {
+            $(".home .hero-menu, .archive.tax-inventory_category .hero-menu").addClass("is_fixed");
+            $(".home .hero-menu, .archive.tax-inventory_category .hero-menu").css("top", banner_header);
+
+        }else{
+            $(".home .hero-menu, .archive.tax-inventory_category .hero-menu").removeClass("is_fixed");
+        
+        }
+    }
+
+    /**
+    * addClassMenuFixed when scroll
+    */
+    function addClassMenuFixed() {
+        if ($(window).scrollTop() > $("#banner-header").outerHeight()) {
+            $('body').addClass('fixed');
+        } else {
+            $('body').removeClass('fixed');
+        }
+    }
+
+    $(window).bind('scroll', function () {
+        addClassMenuFixed();
+        addClassHeroMenu();
+        add_class_furniture_selection();
+    });
+    
+    $( window ).resize(function() {
+        addClassMenuFixed();
+        addClassHeroMenu();
+        add_class_furniture_selection();
+        
+        var header = $("#banner-header").innerHeight();
+        $(".home #wrap-main-section").css("margin-top", header);
+    });
+
+    addClassMenuFixed();
+    add_class_furniture_selection();
+    $(window).on('load', function() {
+        addClassHeroMenu();
+
+        var header = $("#banner-header").innerHeight();
+        $(".home #wrap-main-section").css("margin-top", header);
+
+        scroll_to_floorplans(header);
+    });
+
+    
+    function scroll_to_floorplans(header) {
+        var results = new RegExp('[\?&]' + 'size' + '=([^&#]*)').exec(window.location.href);
+        if(results){
+            // headerHeight = $(".header-inner").outerHeight();
+            $("body section").each(function( index ) {
+                if ($(this).find(".floor-plans-holder").length > 0) {
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top - header
+                    }, 1000);
+                }
+            });
+        }
+    }
+
+    function add_class_furniture_selection() {
+        if($("#floor-plans-arranger").length > 0 && $(window).width() <= 990){
+            var placement = $("#floor-plans-arranger").get(0).getBoundingClientRect();
+            if( placement.top<window.innerHeight && placement.bottom>0 ) {
+                $(".shed-builder-template-wrap .left-sidebar").addClass("show-furniture-selection");
+            }else {
+                $(".shed-builder-template-wrap .left-sidebar").removeClass("show-furniture-selection");
+            }
+
+        }
+    }
+
+});

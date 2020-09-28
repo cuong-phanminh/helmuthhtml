@@ -261,7 +261,7 @@ include("header.php")
             <ul class="bxslider">
                 <li class="testimonial-item 9">
                     <div class="testimonial-content-wrap">
-                        <h2 class="section-title">Our Happy Clients</h2>
+                        <h2 class="section-title section-title-client">Our Happy Clients</h2>
 
                         <div class="testimonial-title"><b>JD</b></div>
                         <div class="testimonial-content">

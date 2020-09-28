@@ -41,7 +41,7 @@ include("./admin/includes/db.inc.php");
                      $query = " SELECT * FROM parent_category";
                      $query_run = mysqli_query($conn, $query);
                     ?>
-                <div class="hero-menu-f is_fixed">
+                <div class="hero-menu">
                     <ul>
                         <?php
                                 if(mysqli_num_rows($query_run) > 0)        
@@ -52,7 +52,7 @@ include("./admin/includes/db.inc.php");
 
                         <li class="">
                             <a href="<?php  echo $row['parent_cate_name'].".php"; ?>">
-                                <img src="<?php  echo $row['url_img']; ?>" alt="sheds">
+                                <img src="<?php  echo './src/images/'.$row['url_img']; ?>" alt="sheds">
                                 <span><?php  echo $row['parent_cate_name']; ?></span>
                             </a>
                         </li>

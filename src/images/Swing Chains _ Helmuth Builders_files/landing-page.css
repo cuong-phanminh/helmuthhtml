@@ -1,0 +1,194 @@
+.wrap-landing .full-height{
+	height: 100vh;
+}
+
+.wrap-landing .section-slider.background {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.single-seadev_landing #wrap-main-section{
+	margin-top: 0;
+}
+
+.wrap-landing .section_background_slider .section-inner, 
+.wrap-landing .section_content_slider .section-inner {
+    padding: 0;
+}
+
+.wrap-landing .section-slider.background .bx-wrapper, 
+.wrap-landing .section-slider.background .bx-viewport, 
+.wrap-landing .section-slider.background .bx-viewport ul, 
+.wrap-landing .section-slider.background .bx-viewport ul li {
+    height: 100% !important;
+}
+
+.wrap-landing .section-content-wrapper {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    align-items: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    height: 100%;
+}
+
+.wrap-landing .section_background_slider .section-content-wrapper, 
+.wrap-landing .section_content_slider .section-content-wrapper {
+    position: absolute;
+    z-index: 100;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+}
+
+.wrap-landing .section-content {
+    padding: 20px;
+    overflow: hidden;
+}
+
+.wrap-landing .section-banner .section-content {
+    width: 100%;
+}
+
+.wrap-landing .section-banner .section-content {
+    width: 100%;
+}
+
+.wrap-landing .navbar-brand{
+	display: inline-block;
+	padding: 0;
+}
+
+.wrap-landing h1.section-title{
+	text-align: center;
+	line-height: 1.2em;
+}
+
+.wrap-landing .section-email .wpcf7-submit{
+	margin: 0;
+	border-radius: 0;
+	font-size: 20px !important;
+}
+
+.wrap-landing ul.grid-list {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    display: -moz-flex;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+}
+
+.wrap-landing li.grid-item.card {
+    padding-top: 20px;
+}
+
+.wrap-landing li.grid-item.card {
+    margin-bottom: 20px;
+}
+.wrap-landing li.grid-item {
+    list-style-type: none;
+    position: relative;
+}
+
+.wrap-landing li.grid-item.card .grid-item-inner {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    background-color: #fff;
+    color: #333;
+}
+
+.wrap-landing #about-us .grid-item-inner {
+    text-align: center;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.wrap-landing li.grid-item.card .grid-item-inner .grid-item-img{
+	display: inline-block;
+}
+
+.wrap-landing .section_testimonial .section-title{
+	text-align: center;
+}
+
+.wrap-landing .section_testimonial .section-title::after,
+.wrap-landing .section-contact h2.section-title::after{
+	left: calc(50% - 30px);
+}
+
+.wrap-landing .section_testimonial .name{
+	text-align: center;
+}
+
+.wrap-landing .bx-wrapper .bx-pager{
+    width: 100%;
+}
+
+.wrap-landing .section_testimonial .bx-wrapper .bx-pager, 
+.wrap-landing .section_testimonial .bx-wrapper .bx-controls-auto{
+	bottom: -40px;
+    width: 100%;
+}
+
+.wrap-landing .section-title::after{
+	display: none;
+}
+
+.wrap-landing .section_contact div.wpcf7-mail-sent-ng, 
+.wrap-landing .section_contact div.wpcf7-validation-errors, 
+.wrap-landing .section_contact div.wpcf7-mail-sent-ok{
+    padding-top: 0;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a{
+    border: 1px solid #666;
+}
+
+@media screen and (max-width: 960px){
+    .wrap-landing .section_testimonial .section-title{
+        font-size: 44px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .wrap-landing .navbar-brand svg, .wrap-landing .navbar-brand img{
+        max-height: 80px;
+    }
+}
+
+@media screen and (max-width: 480px){
+	.wrap-landing .site-info .section-title,
+	.wrap-landing .section_testimonial .section-title,
+	.wrap-landing .section-contact h2.section-title{
+		font-size: 35px;
+		margin-bottom: 15px;
+	}
+
+    .wrap-landing .section-banner .section-content{
+        padding: 0;
+    }
+
+    .wrap-landing .section_background_slider .section-content-wrapper, .wrap-landing .section_content_slider .section-content-wrapper{
+        padding: 10px;
+    }
+
+    .wrap-landing .section-contact .info h4.name{
+        font-size: 30px;
+    }
+}

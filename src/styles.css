@@ -338,6 +338,11 @@ li.shopping-cart > a > img{
     text-align: center;
     font-family: "Alternate Gothic No1 D";
 }
+.section-title-client{
+    font-size: 70px;
+    text-align:u;
+    font-family: "Alternate Gothic No1 D";
+}
 
 
 .section-body {
@@ -1419,4 +1424,12 @@ th, td {
     color: #c1c1c1;
     padding-top: 5%;
     font-family: "Alternate Gothic No1 D",sans-serif;
+}
+
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: .5rem;
+    pointer-events: unset;
 }
